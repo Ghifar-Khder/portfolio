@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghifar Khder — Medical Systems Engineer</title>
+<meta name="description" content="Ghifar Khder — Medical Systems Engineering M.Sc. student building diagnostic AI models and biomedical hardware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --bg:            #0A0E14;
+  --panel:         #10151F;
+  --panel-2:       #141B27;
+  --line:          #212B3A;
+  --line-soft:     #1A2230;
+  --text:          #E7ECF3;
+  --text-muted:    #8A96A8;
+  --text-dim:      #5A6577;
+
+  --signal:        #00D9C0;   /* biosignal teal — from the knee-OA app UI  */
+  --signal-dim:     rgba(0,217,192,0.14);
+  --copper:        #E08A4B;   /* PCB copper — the hardware accent */
+  --copper-dim:    rgba(224,138,75,0.14);
+  --alert:         #E85D5D;
+
+  --font-display:  'Space Grotesk', sans-serif;
+  --font-body:     'IBM Plex Sans', sans-serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+
+  --radius: 10px;
+  --maxw: 1120px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{ background:var(--signal); color:#04140F; }
+
+/* faint engineering grid across the whole page */
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity:0.35;
+  pointer-events:none;
+  z-index:0;
+}
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+section{ position:relative; z-index:1; }
+
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal);
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:'';
+  width:7px; height:7px; border-radius:50%;
+  background:var(--signal);
+  box-shadow:0 0 0 3px var(--signal-dim);
+}
+h1,h2,h3{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; }
+.section-title{ font-size:clamp(28px,4vw,40px); margin-bottom:10px; }
+.section-sub{ color:var(--text-muted); max-width:560px; margin-bottom:44px; font-size:15.5px; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:13.5px; letter-spacing:.02em;
+  padding:12px 20px; border-radius:8px;
+  border:1px solid var(--line);
+  transition:border-color .18s ease, transform .18s ease, background .18s ease;
+  white-space:nowrap;
+}
+.btn:hover{ transform:translateY(-1px); }
+.btn-primary{ background:var(--signal); color:#04140F; border-color:var(--signal); font-weight:600; }
+.btn-primary:hover{ background:#1EFFE4; }
+.btn-ghost{ color:var(--text); background:var(--panel); }
+.btn-ghost:hover{ border-color:var(--signal); color:var(--signal); }
+
+/* ============ NAV ============ */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:rgba(10,14,20,0.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+nav{
+  max-width:var(--maxw); margin:0 auto; padding:0 28px;
+  height:66px; display:flex; align-items:center; justify-content:space-between;
+}
+.logo{
+  font-family:var(--font-mono); font-weight:600; font-size:15px;
+  display:flex; align-items:center; gap:10px;
+}
+.logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--signal); box-shadow:0 0 8px var(--signal); }
+.nav-links{ display:flex; gap:30px; font-size:14px; color:var(--text-muted); }
+.nav-links a:hover{ color:var(--signal); }
+.nav-cta{ display:flex; align-items:center; gap:14px; }
+.burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.burger span{ width:22px; height:2px; background:var(--text); }
+
+@media (max-width:860px){
+  .nav-links{ display:none; }
+  .burger{ display:flex; }
+}
+
+/* ============ HERO ============ */
+.hero{ padding:150px 0 90px; }
+.hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; }
+@media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+.hero h1{ font-size:clamp(34px,5.6vw,58px); line-height:1.06; margin-bottom:20px; }
+.hero h1 .accent{ color:var(--signal); }
+.hero p.lead{ font-size:17px; color:var(--text-muted); max-width:520px; margin-bottom:30px; }
+
+.tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:34px; }
+.tag{
+  font-family:var(--font-mono); font-size:12px; color:var(--copper);
+  border:1px solid rgba(224,138,75,.35); background:var(--copper-dim);
+  padding:5px 10px; border-radius:6px;
+}
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+/* the signature: biosignal -> PCB trace waveform */
+.waveform{ width:100%; margin-top:54px; }
+.waveform svg{ width:100%; height:auto; display:block; }
+.waveform-caption{
+  font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);
+  display:flex; justify-content:space-between; margin-top:8px;
+}
+
+/* hero side card — vitals-style ID card */
+.id-card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px; position:relative; overflow:hidden;
+}
+.id-card::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--signal), var(--copper));
+}
+.id-row{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim); padding:9px 0; border-bottom:1px dashed var(--line-soft); }
+.id-row:last-child{ border-bottom:none; }
+.id-row b{ color:var(--text); font-weight:500; }
+.id-card h3{ font-size:14px; color:var(--signal); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.1em; margin-bottom:16px; }
+
+/* ============ SECTIONS COMMON ============ */
+.section{ padding:96px 0; border-top:1px solid var(--line-soft); }
+
+/* ============ ABOUT ============ */
+.about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+@media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+.about-grid p{ color:var(--text-muted); margin-bottom:16px; font-size:15.5px; }
+.stat-strip{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.stat{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px; }
+.stat .num{ font-family:var(--font-display); font-size:28px; color:var(--signal); }
+.stat .lab{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.08em; margin-top:4px; }
+
+/* ============ SKILLS ============ */
+.skill-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media (max-width:860px){ .skill-groups{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){ .skill-groups{ grid-template-columns:1fr; } }
+.skill-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px; }
+.skill-card h4{ font-family:var(--font-mono); font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--copper); margin-bottom:14px; }
+.skill-card ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+.skill-card li{ font-size:14px; color:var(--text-muted); display:flex; align-items:center; gap:9px; }
+.skill-card li::before{ content:''; width:5px; height:5px; background:var(--signal); border-radius:50%; flex:none; }
+
+/* ============ LANGUAGES ============ */
+.lang-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media (max-width:860px){ .lang-grid{ grid-template-columns:1fr; } }
+.lang-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:24px; }
+.lang-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+.lang-top h4{ font-family:var(--font-display); font-size:19px; }
+.lang-level{ font-family:var(--font-mono); font-size:11px; color:var(--signal); }
+.lang-native{ font-size:13px; color:var(--text-dim); margin-bottom:16px; }
+.cefr{ display:flex; gap:4px; margin-bottom:10px; }
+.cefr span{ flex:1; height:6px; border-radius:3px; background:var(--line); }
+.cefr span.on{ background:var(--signal); }
+.cefr-labels{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; color:var(--text-dim); margin-bottom:14px; }
+.lang-card p{ font-size:13.5px; color:var(--text-muted); }
+
+/* ============ PROJECTS ============ */
+.proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+@media (max-width:760px){ .proj-grid{ grid-template-columns:1fr; } }
+.proj-card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px; transition:border-color .18s ease, transform .18s ease;
+  display:flex; flex-direction:column; height:100%;
+}
+.proj-card:hover{ border-color:var(--signal); transform:translateY(-3px); }
+.proj-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+.proj-card h3{ font-size:18px; }
+.proj-link{ font-family:var(--font-mono); font-size:12px; color:var(--signal); border:1px solid rgba(0,217,192,.3); padding:4px 9px; border-radius:6px; flex:none; }
+.proj-card p{ color:var(--text-muted); font-size:14px; margin-bottom:16px; flex:1; }
+.proj-stack{ display:flex; flex-wrap:wrap; gap:6px; }
+.proj-stack span{ font-family:var(--font-mono); font-size:11px; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line-soft); padding:3px 8px; border-radius:5px; }
+.proj-links{ display:flex; gap:10px; margin-top:16px; }
+.proj-links a{ font-family:var(--font-mono); font-size:12px; color:var(--text-muted); }
+.proj-links a:hover{ color:var(--signal); }
+
+.projects-more{ text-align:center; margin-top:34px; }
+
+/* ============ ELECTRONICS ============ */
+.elec-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+@media (max-width:860px){ .elec-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){ .elec-grid{ grid-template-columns:1fr; } }
+.elec-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.elec-media{
+  aspect-ratio:4/3; background:var(--panel-2);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--text-dim); font-family:var(--font-mono); font-size:12px; text-align:center;
+  border-bottom:1px solid var(--line); padding:14px;
+  position:relative;
+}
+.elec-media img, .elec-media video{ width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+.elec-body{ padding:18px; }
+.elec-body h4{ font-family:var(--font-display); font-size:16px; margin-bottom:6px; }
+.elec-body p{ font-size:13px; color:var(--text-muted); }
+.placeholder-note{
+  margin-top:26px; padding:16px 18px; border:1px dashed var(--line);
+  border-radius:var(--radius); font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
+}
+.placeholder-note b{ color:var(--copper); }
+
+/* ============ EDUCATION ============ */
+.edu-item{ display:grid; grid-template-columns:150px 1fr; gap:28px; padding:26px 0; border-bottom:1px solid var(--line-soft); }
+.edu-item:last-child{ border-bottom:none; }
+@media (max-width:640px){ .edu-item{ grid-template-columns:1fr; gap:6px; } }
+.edu-date{ font-family:var(--font-mono); font-size:12.5px; color:var(--signal); }
+.edu-body h3{ font-size:18px; margin-bottom:4px; }
+.edu-body .school{ color:var(--copper); font-size:14px; margin-bottom:8px; }
+.edu-body p{ color:var(--text-muted); font-size:14.5px; }
+
+/* ============ CV / CONTACT ============ */
+.cv-band{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:44px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.cv-band h3{ font-size:22px; margin-bottom:8px; }
+.cv-band p{ color:var(--text-muted); font-size:14.5px; max-width:440px; }
+
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media (max-width:640px){ .contact-grid{ grid-template-columns:1fr; } }
+.contact-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px; display:flex; align-items:center; gap:16px; }
+.contact-card:hover{ border-color:var(--signal); }
+.contact-icon{ width:38px; height:38px; border-radius:8px; background:var(--signal-dim); color:var(--signal); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); flex:none; }
+.contact-card .lab{ font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em; }
+.contact-card .val{ font-size:14.5px; color:var(--text); }
+
+footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
+.footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.footer-row p{ font-family:var(--font-mono); font-size:12px; color:var(--text-dim); }
+.social{ display:flex; gap:16px; }
+.social a{ font-family:var(--font-mono); font-size:12px; color:var(--text-muted); }
+.social a:hover{ color:var(--signal); }
+
+/* reveal-on-scroll */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span> GHIFAR.EIT</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#languages">Languages</a>
+      <a href="#projects">Projects</a>
+      <a href="#electronics">Electronics</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="assets/cv/Ghifar_Khder_CV.pdf" class="btn btn-primary" style="padding:9px 16px;">CV ↓</a>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Medical Systems Engineering · OvGU Magdeburg</div>
+      <h1>Building the bridge between <span class="accent">diagnostic AI</span> and <span class="accent">medical hardware</span>.</h1>
+      <p class="lead">I'm Ghifar Khder — an M.Sc. student in Medical Systems Engineering, working on deep-learning models for medical imaging and hands-on biomedical electronics. Based in Magdeburg, Germany.</p>
+      <div class="tags">
+        <span class="tag">Medical Imaging</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Embedded / Hardware</span>
+        <span class="tag">Signal Processing</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">See projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+
+      <div class="waveform">
+        <svg viewBox="0 0 620 90" fill="none" xmlns="http://www.w3.org/2000/svg" id="waveSvg">
+          <!-- biosignal (ECG-like) morphing into a PCB trace -->
+          <path d="M0,45 L40,45 L52,15 L64,75 L76,45 L110,45 L120,30 L130,60 L140,45 L175,45"
+                stroke="#00D9C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M175,45 L210,45 L222,45 L222,20 L260,20 L260,45 L300,45 L300,70 L340,70 L340,45 L620,45"
+                stroke="#E08A4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 7"/>
+          <circle cx="222" cy="20" r="3" fill="#E08A4B"/>
+          <circle cx="300" cy="70" r="3" fill="#E08A4B"/>
+          <circle cx="340" cy="45" r="3" fill="#E08A4B"/>
+        </svg>
+      </div>
+      <div class="waveform-caption"><span>SIGNAL — biomedical</span><span>TRACE — hardware</span></div>
+    </div>
+
+    <div class="id-card">
+      <h3>// engineer_profile</h3>
+      <div class="id-row"><span>Name</span><b>Ghifar Khder</b></div>
+      <div class="id-row"><span>Program</span><b>M.Sc. Medical Systems Eng.</b></div>
+      <div class="id-row"><span>Institution</span><b>OvGU Magdeburg</b></div>
+      <div class="id-row"><span>Prior degree</span><b>B.Sc. Medizintechnik — 2.0</b></div>
+      <div class="id-row"><span>Focus</span><b>Hardware · Medical Devices</b></div>
+      <div class="id-row"><span>Languages</span><b>AR · EN (C1) · DE (B2)</b></div>
+      <div class="id-row"><span>Location</span><b>Magdeburg, DE</b></div>
+      <div class="id-row"><span>Status</span><b style="color:var(--signal);">Open to opportunities</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2 class="section-title reveal">A hardware-minded engineer with an AI toolkit</h2>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm currently pursuing my Master's in Medical Systems Engineering at Otto-von-Guericke-Universität Magdeburg, after finishing my Bachelor's in Medizintechnik with a grade of 2.0 — top 5 of my graduating class.</p>
+        <p>My focus is shifting toward hardware and medical device engineering: the instrumentation, sensors, and electronics that sit behind clinical decisions — while keeping the software and AI side as a strength I bring from my imaging and signal-processing projects.</p>
+        <p>Originally from Syria, now based in Magdeburg, Germany — working across Arabic, English, and German.</p>
+      </div>
+      <div class="stat-strip reveal">
+        <div class="stat"><div class="num">6+</div><div class="lab">ML / medical imaging projects</div></div>
+        <div class="stat"><div class="num">2.0</div><div class="lab">B.Sc. Medizintechnik grade</div></div>
+        <div class="stat"><div class="num">3</div><div class="lab">Languages spoken</div></div>
+        <div class="stat"><div class="num">Top 5</div><div class="lab">of graduating class</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Skills</div>
+    <h2 class="section-title reveal">What I work with</h2>
+    <p class="section-sub reveal">From biomedical instrumentation to the deep learning models trained on the signals and images it produces.</p>
+    <div class="skill-groups">
+      <div class="skill-card reveal">
+        <h4>Hardware / Medical Devices</h4>
+        <ul>
+          <li>Biomedical instrumentation</li>
+          <li>Sensors & signal acquisition</li>
+          <li>Embedded systems</li>
+          <li>Circuit design fundamentals</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <h4>AI / Deep Learning</h4>
+        <ul>
+          <li>Medical image classification (CNN, ResNet)</li>
+          <li>Grad-CAM / explainability</li>
+          <li>GAN-based data augmentation</li>
+          <li>Ensemble learning</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <h4>Tools & Languages</h4>
+        <ul>
+          <li>Python, TensorFlow / Keras</li>
+          <li>Streamlit, OpenCV</li>
+          <li>Git / GitHub</li>
+          <li>MATLAB / signal processing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LANGUAGES ============ -->
+<section class="section" id="languages">
+  <div class="wrap">
+    <div class="eyebrow">Languages</div>
+    <h2 class="section-title reveal">Communicating across borders</h2>
+    <p class="section-sub reveal">Native Arabic, professional English, and working German — day to day in Magdeburg.</p>
+    <div class="lang-grid">
+      <div class="lang-card reveal">
+        <div class="lang-top"><h4>🇸🇾 Arabic</h4><span class="lang-level">Native</span></div>
+        <div class="lang-native">العربية — mother tongue</div>
+        <div class="cefr"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+        <div class="cefr-labels"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+        <p>Native fluency across everyday, academic, and professional contexts.</p>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-top"><h4>🇬🇧 English</h4><span class="lang-level">C1</span></div>
+        <div class="lang-native">TOEFL iBT certified</div>
+        <div class="cefr"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+        <div class="cefr-labels"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+        <p>Advanced proficiency — comfortable with technical writing, coursework, and academic communication.</p>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-top"><h4>🇩🇪 German</h4><span class="lang-level">B2</span></div>
+        <div class="lang-native">Deutsch — certified B1, now B2</div>
+        <div class="cefr"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+        <div class="cefr-labels"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+        <p>Upper-intermediate — living and studying in Magdeburg, actively progressing toward C1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Software Projects</div>
+    <h2 class="section-title reveal">Medical imaging & ML projects</h2>
+    <p class="section-sub reveal">Independent deep learning projects — most deployed as live Streamlit apps with full write-ups on GitHub.</p>
+
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Knee Osteoarthritis Grading</h3><span class="proj-link">Live app</span></div>
+        <p>CNN (ResNet) classifier grading knee osteoarthritis severity (KL 0–4) from X-rays, with Grad-CAM interpretability and Conditional DCGAN class balancing.</p>
+        <div class="proj-stack"><span>ResNet</span><span>Grad-CAM</span><span>DCGAN</span><span>Streamlit</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder/knee-osteoarthritis-classification" target="_blank">GitHub →</a>
+          <a href="https://knee-osteoarthritis-classification-ghifar-khder.streamlit.app/" target="_blank">Open app →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Diabetes Prediction</h3><span class="proj-link">Live app</span></div>
+        <p>Stacked ensemble (ANN, KNN, LightGBM, RBF-SVM, Linear SVM) with a Fuzzy C-Means enhanced ANN meta-learner, on the Pima Indians dataset.</p>
+        <div class="proj-stack"><span>Ensemble Learning</span><span>FCM</span><span>Streamlit</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder/Diabetes-Prediction" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Coronary Stenosis Detector</h3></div>
+        <p>ResNet101V2-based bounding box regression to localize coronary stenosis on ~8,300 angiographic images, evaluated with IoU-based metrics.</p>
+        <div class="proj-stack"><span>ResNet101V2</span><span>Object Detection</span><span>Streamlit</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Fetal Brain Ultrasound Classifier</h3></div>
+        <p>Custom HandmadeResCNN architecture classifying 12 fetal brain abnormality categories from ultrasound, with two-stage progressive cGAN augmentation.</p>
+        <div class="proj-stack"><span>Custom CNN</span><span>cGAN</span><span>Ultrasound</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>CAP Phase Detection</h3></div>
+        <p>Deep learning model automating Cyclic Alternating Pattern (CAP) sleep-phase classification from single-channel EEG — a basic learning project exploring autonomous physiological signal analysis.</p>
+        <div class="proj-stack"><span>EEG</span><span>Deep Learning</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder/CAP-Phase-Detection" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Crop Disease & Yield Prediction</h3></div>
+        <p>Plant leaf disease diagnosis and crop yield prediction models applying the same imaging/ML pipeline outside the medical domain.</p>
+        <div class="proj-stack"><span>CNN</span><span>Agri-Tech</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder/crop-disease-yield-prediction" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="projects-more reveal">
+      <a href="https://github.com/Ghifar-Khder" target="_blank" class="btn btn-ghost">View all repositories on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ELECTRONICS ============ -->
+<section class="section" id="electronics">
+  <div class="wrap">
+    <div class="eyebrow">Hardware Work</div>
+    <h2 class="section-title reveal">Electronics & device projects</h2>
+    <p class="section-sub reveal">Hands-on biomedical hardware and electronics builds. Replace the placeholders below with your own photos and video clips.</p>
+
+    <div class="elec-grid">
+      <div class="elec-card reveal">
+        <div class="elec-media">
+          <!-- Replace with: <img src="assets/electronics/project1.jpg" alt="..."> -->
+          Add photo / video<br>assets/electronics/project1.*
+        </div>
+        <div class="elec-body">
+          <h4>Project name</h4>
+          <p>One or two lines describing the build, the components used, and what it does.</p>
+        </div>
+      </div>
+      <div class="elec-card reveal">
+        <div class="elec-media">
+          Add photo / video<br>assets/electronics/project2.*
+        </div>
+        <div class="elec-body">
+          <h4>Project name</h4>
+          <p>One or two lines describing the build, the components used, and what it does.</p>
+        </div>
+      </div>
+      <div class="elec-card reveal">
+        <div class="elec-media">
+          Add photo / video<br>assets/electronics/project3.*
+        </div>
+        <div class="elec-body">
+          <h4>Project name</h4>
+          <p>One or two lines describing the build, the components used, and what it does.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder-note reveal">
+      <b>To fill this in:</b> drop your images/videos into <code>assets/electronics/</code>, then in the HTML swap each
+      <code>.elec-media</code> placeholder div for <code>&lt;img src="assets/electronics/yourfile.jpg"&gt;</code> or
+      <code>&lt;video src="assets/electronics/yourfile.mp4" controls&gt;&lt;/video&gt;</code>, and update the title/description text.
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="eyebrow">Education</div>
+    <h2 class="section-title reveal">Academic background</h2>
+
+    <div class="edu-item reveal">
+      <div class="edu-date">Current</div>
+      <div class="edu-body">
+        <h3>M.Sc. Medical Systems Engineering</h3>
+        <div class="school">Otto-von-Guericke-Universität Magdeburg — Faculty of Electrical Engineering & Information Technology (EIT)</div>
+        <p>Graduate studies with a growing focus on hardware and medical device engineering.</p>
+      </div>
+    </div>
+
+    <div class="edu-item reveal">
+      <div class="edu-date">Completed</div>
+      <div class="edu-body">
+        <h3>B.Sc. Medizintechnik</h3>
+        <div class="school">Grade: 2.0 — Top 5 of graduating class</div>
+        <p>Foundational studies in medical technology and biomedical engineering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CV ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="cv-band reveal">
+      <div>
+        <h3>Want the full picture?</h3>
+        <p>Download my CV for the complete academic and project history, in one document.</p>
+      </div>
+      <a href="assets/cv/Ghifar_Khder_CV.pdf" class="btn btn-primary" download>Download CV (PDF) ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-title reveal">Let's talk</h2>
+    <p class="section-sub reveal">Open to opportunities in medical device engineering, biomedical hardware, and applied AI for healthcare.</p>
+
+    <div class="contact-grid">
+      <a href="mailto:ghifarkhder2000@gmail.com" class="contact-card reveal">
+        <div class="contact-icon">@</div>
+        <div><div class="lab">Email</div><div class="val">ghifarkhder2000@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/ghifar-khder" target="_blank" class="contact-card reveal">
+        <div class="contact-icon">in</div>
+        <div><div class="lab">LinkedIn</div><div class="val">linkedin.com/in/ghifar-khder</div></div>
+      </a>
+      <a href="https://github.com/Ghifar-Khder" target="_blank" class="contact-card reveal">
+        <div class="contact-icon">&lt;/&gt;</div>
+        <div><div class="lab">GitHub</div><div class="val">github.com/Ghifar-Khder</div></div>
+      </a>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <div><div class="lab">Location</div><div class="val">Magdeburg, Germany</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© <span id="year"></span> Ghifar Khder — Medical Systems Engineering</p>
+    <div class="social">
+      <a href="https://github.com/Ghifar-Khder" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/ghifar-khder" target="_blank">LinkedIn</a>
+      <a href="mailto:ghifarkhder2000@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{ threshold:0.12 });
+revealEls.forEach(el=>io.observe(el));
+
+// mobile nav (simple toggle -> scroll to top nav, links still work via anchor)
+const burger = document.getElementById('burger');
+burger.addEventListener('click', ()=>{
+  const links = document.querySelector('.nav-links');
+  const isOpen = links.style.display === 'flex';
+  links.style.display = isOpen ? 'none' : 'flex';
+  links.style.position = 'fixed';
+  links.style.top = '66px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = '#0A0E14';
+  links.style.flexDirection = 'column';
+  links.style.padding = '20px 28px';
+  links.style.borderBottom = '1px solid #212B3A';
+});
+</script>
+
+</body>
+</html>
