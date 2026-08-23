@@ -25,6 +25,8 @@
   --signal-dim:     rgba(0,217,192,0.14);
   --copper:        #E08A4B;   /* PCB copper — the hardware accent */
   --copper-dim:    rgba(224,138,75,0.14);
+  --code:          #8B7FFF;   /* binary / software accent */
+  --code-dim:      rgba(139,127,255,0.14);
   --alert:         #E85D5D;
 
   --font-display:  'Space Grotesk', sans-serif;
@@ -163,19 +165,32 @@ nav{
 .waveform svg{ width:100%; height:auto; display:block; }
 .waveform-caption{
   font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);
-  display:flex; justify-content:space-between; margin-top:8px;
+  display:flex; align-items:center; justify-content:center; gap:10px; margin-top:8px;
 }
+.waveform-caption span:nth-child(1){ color:var(--signal); }
+.waveform-caption span:nth-child(3){ color:var(--copper); }
+.waveform-caption span:nth-child(5){ color:var(--code); }
 .wave-line{ stroke-dasharray:900; stroke-dashoffset:900; animation:draw-wave 2.1s ease-out forwards .3s; }
-.wave-line-2{ stroke-dasharray:900; stroke-dashoffset:900; animation:draw-wave 2.1s ease-out forwards .9s; }
+.wave-line-2{ stroke-dasharray:1100; stroke-dashoffset:1100; animation:draw-wave 2.1s ease-out forwards .9s; }
+.wave-line-3{ stroke-dasharray:900; stroke-dashoffset:900; animation:draw-wave 1.6s ease-out forwards 1.5s; }
+.wave-icon{ opacity:0; animation:node-in .5s ease-out forwards; transform-origin:center; }
+.wave-icon-1{ animation-delay:.5s; }
+.wave-icon-2{ animation-delay:1.6s; }
+.wave-icon-3{ animation-delay:2.5s; }
+.wave-bits{ opacity:0; animation:node-in .5s ease-out forwards 2.4s; font-family:'IBM Plex Mono', monospace; }
 @keyframes draw-wave{ to{ stroke-dashoffset:0; } }
 .wave-node{ opacity:0; animation:node-in .4s ease-out forwards; }
-.pulse-runner{ animation:run-pulse 3.6s linear infinite 2.4s; opacity:0; }
+.pulse-runner{ animation:run-pulse 4.6s linear infinite 2.6s; opacity:0; filter:drop-shadow(0 0 4px currentColor); }
 @keyframes node-in{ to{ opacity:1; } }
 @keyframes run-pulse{
-  0%{ opacity:0; offset-distance:0%; }
-  4%{ opacity:1; }
-  92%{ opacity:1; }
-  100%{ opacity:0; offset-distance:100%; }
+  0%{ opacity:0; offset-distance:0%; fill:#00D9C0; color:#00D9C0; }
+  3%{ opacity:1; }
+  24%{ fill:#00D9C0; color:#00D9C0; }
+  32%{ fill:#E08A4B; color:#E08A4B; }
+  60%{ fill:#E08A4B; color:#E08A4B; }
+  68%{ fill:#8B7FFF; color:#8B7FFF; }
+  94%{ opacity:1; fill:#8B7FFF; color:#8B7FFF; }
+  100%{ opacity:0; offset-distance:100%; fill:#8B7FFF; color:#8B7FFF; }
 }
 
 /* hero side card — vitals-style ID card, tilts toward the cursor */
@@ -203,6 +218,16 @@ nav{
 .id-row:hover{ padding-left:5px; color:var(--text-muted); }
 .id-row b{ color:var(--text); font-weight:500; }
 .id-card h3{ font-size:14px; color:var(--signal); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.1em; margin-bottom:16px; }
+.id-photo-row{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.id-photo{
+  width:52px; height:52px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--signal); flex:none;
+}
+.id-photo-fallback{
+  display:none; width:52px; height:52px; border-radius:50%; flex:none;
+  border:1px dashed var(--line); align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:8.5px; color:var(--text-dim); text-align:center; line-height:1.3;
+}
 
 /* ============ SECTIONS COMMON ============ */
 .section{ padding:96px 0; border-top:1px solid var(--line-soft); }
@@ -218,8 +243,7 @@ nav{
 .stat .lab{ font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.08em; margin-top:4px; }
 
 /* ============ SKILLS ============ */
-.skill-groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-@media (max-width:860px){ .skill-groups{ grid-template-columns:1fr 1fr; } }
+.skill-groups{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
 @media (max-width:560px){ .skill-groups{ grid-template-columns:1fr; } }
 .skill-card{
   background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px;
@@ -254,6 +278,7 @@ nav{
 .cefr{ display:flex; gap:4px; margin-bottom:10px; }
 .cefr span{ flex:1; height:6px; border-radius:3px; background:var(--line); }
 .cefr span.on{ background:var(--signal); }
+.cefr span.half{ background:linear-gradient(90deg, var(--signal) 50%, var(--line) 50%); }
 .cefr-labels{ display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; color:var(--text-dim); margin-bottom:14px; }
 .lang-card p{ font-size:13.5px; color:var(--text-muted); }
 
@@ -282,9 +307,17 @@ nav{
 .proj-stack{ display:flex; flex-wrap:wrap; gap:6px; }
 .proj-stack span{ font-family:var(--font-mono); font-size:11px; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line-soft); padding:3px 8px; border-radius:5px; transition:border-color .18s ease, color .18s ease; }
 .proj-card:hover .proj-stack span{ border-color:rgba(0,217,192,.35); color:var(--text-muted); }
-.proj-links{ display:flex; gap:10px; margin-top:16px; }
-.proj-links a{ font-family:var(--font-mono); font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; transition:color .18s ease, gap .18s ease; }
-.proj-links a:hover{ color:var(--signal); gap:5px; }
+.proj-links{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+.proj-btn{
+  font-family:var(--font-mono); font-size:14px; display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 18px; border-radius:8px; border:1px solid var(--line); font-weight:500;
+  color:var(--text-muted); background:var(--panel-2); width:100%;
+  transition:border-color .18s ease, color .18s ease, transform .15s ease, background .18s ease;
+}
+.proj-btn:hover{ transform:translateY(-1px); }
+.proj-btn-code:hover{ border-color:var(--copper); color:var(--copper); }
+.proj-btn-app{ border-color:rgba(0,217,192,.35); color:var(--signal); background:var(--signal-dim); }
+.proj-btn-app:hover{ background:var(--signal); color:#04140F; }
 
 .projects-more{ text-align:center; margin-top:34px; }
 
@@ -360,7 +393,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 
 <header>
   <nav>
-    <div class="logo"><span class="dot"></span> GHIFAR.EIT</div>
+    <div class="logo"><span class="dot"></span> Ghifar Khder</div>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -396,29 +429,62 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="waveform">
-        <svg viewBox="0 0 620 90" fill="none" xmlns="http://www.w3.org/2000/svg" id="waveSvg">
-          <!-- biosignal (ECG-like) morphing into a PCB trace -->
+        <svg viewBox="0 0 620 128" fill="none" xmlns="http://www.w3.org/2000/svg" id="waveSvg">
+          <!-- biosignal (ECG-like) morphing into a circuit trace, then into binary/code -->
           <path class="wave-line" d="M0,45 L40,45 L52,15 L64,75 L76,45 L110,45 L120,30 L130,60 L140,45 L175,45"
                 stroke="#00D9C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path id="tracePath" class="wave-line-2" d="M175,45 L210,45 L222,45 L222,20 L260,20 L260,45 L300,45 L300,70 L340,70 L340,45 L620,45"
-                stroke="#E08A4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 7"/>
-          <circle class="wave-node" style="animation-delay:1.3s" cx="222" cy="20" r="3" fill="#E08A4B"/>
-          <circle class="wave-node" style="animation-delay:1.55s" cx="300" cy="70" r="3" fill="#E08A4B"/>
-          <circle class="wave-node" style="animation-delay:1.8s" cx="340" cy="45" r="3" fill="#E08A4B"/>
-          <circle class="pulse-runner" r="4" fill="#00D9C0" style="offset-path:path('M0,45 L40,45 L52,15 L64,75 L76,45 L110,45 L120,30 L130,60 L140,45 L175,45 L210,45 L222,45 L222,20 L260,20 L260,45 L300,45 L300,70 L340,70 L340,45 L620,45');"/>
+          <path id="tracePath" class="wave-line-2"
+                d="M175,45 L195,45 L203,33 L211,57 L219,33 L227,57 L235,45 L255,45 L255,20 L285,20 L285,45 L305,45 L305,70 L335,70 L335,45 L400,45"
+                stroke="#E08A4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="wave-line-3" d="M400,45 L420,45 L420,20 L440,20 L440,70 L460,70 L460,20 L480,20 L480,70 L500,70 L500,20 L520,20 L520,70 L540,70 L540,20 L560,20 L560,70 L580,70 L580,45 L620,45"
+                stroke="#8B7FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- via / node markers on the circuit segment -->
+          <circle class="wave-node" style="animation-delay:1.3s" cx="255" cy="20" r="3" fill="#E08A4B"/>
+          <circle class="wave-node" style="animation-delay:1.55s" cx="305" cy="70" r="3" fill="#E08A4B"/>
+          <circle class="wave-node" style="animation-delay:1.8s" cx="335" cy="70" r="3" fill="#E08A4B"/>
+
+          <!-- traveling pulse: teal -> copper -> violet -->
+          <circle class="pulse-runner" r="4" fill="#00D9C0" style="offset-path:path('M0,45 L40,45 L52,15 L64,75 L76,45 L110,45 L120,30 L130,60 L140,45 L175,45 L195,45 L203,33 L211,57 L219,33 L227,57 L235,45 L255,45 L255,20 L285,20 L285,45 L305,45 L305,70 L335,70 L335,45 L400,45 L420,45 L420,20 L440,20 L440,70 L460,70 L460,20 L480,20 L480,70 L500,70 L500,20 L520,20 L520,70 L540,70 L540,20 L560,20 L560,70 L580,70 L580,45 L620,45');"/>
+
+          <!-- segment icons -->
+          <g class="wave-icon wave-icon-1" transform="translate(87,118) scale(0.85) translate(-12,-12)">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#00D9C0"/>
+          </g>
+          <g class="wave-icon wave-icon-2" transform="translate(290,118)" stroke="#E08A4B" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-8" y="-8" width="16" height="16" rx="2"/>
+            <line x1="-5" y1="-8" x2="-5" y2="-11.5"/>
+            <line x1="0" y1="-8" x2="0" y2="-11.5"/>
+            <line x1="5" y1="-8" x2="5" y2="-11.5"/>
+            <line x1="-5" y1="8" x2="-5" y2="11.5"/>
+            <line x1="0" y1="8" x2="0" y2="11.5"/>
+            <line x1="5" y1="8" x2="5" y2="11.5"/>
+            <line x1="-8" y1="-5" x2="-11.5" y2="-5"/>
+            <line x1="-8" y1="5" x2="-11.5" y2="5"/>
+            <line x1="8" y1="-5" x2="11.5" y2="-5"/>
+            <line x1="8" y1="5" x2="11.5" y2="5"/>
+            <rect x="-3.5" y="-3.5" width="7" height="7" rx="1" stroke-width="1.1"/>
+          </g>
+          <g class="wave-icon wave-icon-3" transform="translate(510,118)" fill="#8B7FFF">
+            <path d="M0,-10 C1.1,-3.2 3.2,-1.1 10,0 C3.2,1.1 1.1,3.2 0,10 C-1.1,3.2 -3.2,1.1 -10,0 C-3.2,-1.1 -1.1,-3.2 0,-10 Z"/>
+          </g>
+
         </svg>
       </div>
-      <div class="waveform-caption"><span>SIGNAL — biomedical</span><span>TRACE — hardware</span></div>
     </div>
 
     <div class="id-card">
-      <h3>// engineer_profile</h3>
+      <div class="id-photo-row">
+        <img class="id-photo" src="assets/profile.jpg" alt="Ghifar Khder" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="id-photo-fallback">Add<br>assets/profile.jpg</div>
+        <h3 style="margin:0;">// engineer_profile</h3>
+      </div>
       <div class="id-row"><span>Name</span><b>Ghifar Khder</b></div>
       <div class="id-row"><span>Program</span><b>M.Sc. Medical Systems Eng.</b></div>
       <div class="id-row"><span>Institution</span><b>OvGU Magdeburg</b></div>
       <div class="id-row"><span>Prior degree</span><b>B.Sc. Medizintechnik — 2.0</b></div>
       <div class="id-row"><span>Focus</span><b>Hardware · Medical Devices</b></div>
-      <div class="id-row"><span>Languages</span><b>AR · EN (C1) · DE (B2)</b></div>
+      <div class="id-row"><span>Languages</span><b>AR · EN (C1) · DE (B2.1→B2.2)</b></div>
       <div class="id-row"><span>Location</span><b>Magdeburg, DE</b></div>
       <div class="id-row"><span>Status</span><b style="color:var(--signal);">Open to opportunities</b></div>
     </div>
@@ -471,15 +537,6 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
           <li>Ensemble learning</li>
         </ul>
       </div>
-      <div class="skill-card reveal">
-        <h4>Tools & Languages</h4>
-        <ul>
-          <li>Python, TensorFlow / Keras</li>
-          <li>Streamlit, OpenCV</li>
-          <li>Git / GitHub</li>
-          <li>MATLAB / signal processing</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
@@ -488,8 +545,8 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 <section class="section" id="languages">
   <div class="wrap">
     <div class="eyebrow">Languages</div>
-    <h2 class="section-title reveal">Communicating across borders</h2>
-    <p class="section-sub reveal">Native Arabic, professional English, and working German — day to day in Magdeburg.</p>
+    <h2 class="section-title reveal">Languages</h2>
+    <p class="section-sub reveal">Arabic (native), English (C1), and German (B2.1, moving toward B2.2).</p>
     <div class="lang-grid">
       <div class="lang-card reveal">
         <div class="lang-top"><h4>🇸🇾 Arabic</h4><span class="lang-level">Native</span></div>
@@ -506,11 +563,11 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
         <p>Advanced proficiency — comfortable with technical writing, coursework, and academic communication.</p>
       </div>
       <div class="lang-card reveal">
-        <div class="lang-top"><h4>🇩🇪 German</h4><span class="lang-level">B2</span></div>
-        <div class="lang-native">Deutsch — certified B1, now B2</div>
-        <div class="cefr"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+        <div class="lang-top"><h4>🇩🇪 German</h4><span class="lang-level">B2.1 → B2.2</span></div>
+        <div class="lang-native">Deutsch — certified B1</div>
+        <div class="cefr"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on half"></span><span></span><span></span></div>
         <div class="cefr-labels"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
-        <p>Upper-intermediate — living and studying in Magdeburg, actively progressing toward C1.</p>
+        <p>Currently at B2.1, moving toward B2.2.</p>
       </div>
     </div>
   </div>
@@ -529,53 +586,46 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
         <p>CNN (ResNet) classifier grading knee osteoarthritis severity (KL 0–4) from X-rays, with Grad-CAM interpretability and Conditional DCGAN class balancing.</p>
         <div class="proj-stack"><span>ResNet</span><span>Grad-CAM</span><span>DCGAN</span><span>Streamlit</span></div>
         <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder/knee-osteoarthritis-classification" target="_blank">GitHub →</a>
-          <a href="https://knee-osteoarthritis-classification-ghifar-khder.streamlit.app/" target="_blank">Open app →</a>
+          <a href="https://github.com/Ghifar-Khder/knee-osteoarthritis-classification" target="_blank" class="proj-btn proj-btn-code">💻 GitHub Repo</a>
+          <a href="https://knee-osteoarthritis-classification-ghifar-khder.streamlit.app/" target="_blank" class="proj-btn proj-btn-app">▶ Open App</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-top"><h3>Diabetes Prediction</h3><span class="proj-link">Live app</span></div>
         <p>Stacked ensemble (ANN, KNN, LightGBM, RBF-SVM, Linear SVM) with a Fuzzy C-Means enhanced ANN meta-learner, on the Pima Indians dataset.</p>
-        <div class="proj-stack"><span>Ensemble Learning</span><span>FCM</span><span>Streamlit</span></div>
+        <div class="proj-stack"><span>Ensemble Learning</span><span>Machine Learning</span><span>Advanced Data Preprocessing</span><span>FCM</span></div>
         <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder/Diabetes-Prediction" target="_blank">GitHub →</a>
+          <a href="https://github.com/Ghifar-Khder/Diabetes-Prediction" target="_blank" class="proj-btn proj-btn-code">💻 GitHub Repo</a>
+          <a href="https://diabetes-prediction-ghifarkhder.streamlit.app/" target="_blank" class="proj-btn proj-btn-app">▶ Open App</a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><h3>Crop Disease & Yield Prediction</h3><span class="proj-link">Live app</span></div>
+        <p>Plant leaf disease diagnosis and crop yield prediction models applying the same imaging/ML pipeline outside the medical domain.</p>
+        <div class="proj-stack"><span>Machine Learning</span><span>Deep Learning</span><span>Transfer Learning</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/Ghifar-Khder/crop-disease-yield-prediction" target="_blank" class="proj-btn proj-btn-code">💻 GitHub Repo</a>
+          <a href="https://gk-crops.streamlit.app/" target="_blank" class="proj-btn proj-btn-app">▶ Open App</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-top"><h3>Coronary Stenosis Detector</h3></div>
         <p>ResNet101V2-based bounding box regression to localize coronary stenosis on ~8,300 angiographic images, evaluated with IoU-based metrics.</p>
-        <div class="proj-stack"><span>ResNet101V2</span><span>Object Detection</span><span>Streamlit</span></div>
+        <div class="proj-stack"><span>ResNet101V2</span><span>Object Detection</span></div>
         <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder" target="_blank">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-top"><h3>Fetal Brain Ultrasound Classifier</h3></div>
-        <p>Custom HandmadeResCNN architecture classifying 12 fetal brain abnormality categories from ultrasound, with two-stage progressive cGAN augmentation.</p>
-        <div class="proj-stack"><span>Custom CNN</span><span>cGAN</span><span>Ultrasound</span></div>
-        <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder" target="_blank">GitHub →</a>
+          <a href="https://github.com/Ghifar-Khder" target="_blank" class="proj-btn proj-btn-code">💻 GitHub Repo</a>
         </div>
       </div>
 
       <div class="proj-card reveal">
         <div class="proj-top"><h3>CAP Phase Detection</h3></div>
         <p>Deep learning model automating Cyclic Alternating Pattern (CAP) sleep-phase classification from single-channel EEG — a basic learning project exploring autonomous physiological signal analysis.</p>
-        <div class="proj-stack"><span>EEG</span><span>Deep Learning</span></div>
+        <div class="proj-stack"><span>EEG</span><span>Deep Learning</span><span>1D CNN</span></div>
         <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder/CAP-Phase-Detection" target="_blank">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-top"><h3>Crop Disease & Yield Prediction</h3></div>
-        <p>Plant leaf disease diagnosis and crop yield prediction models applying the same imaging/ML pipeline outside the medical domain.</p>
-        <div class="proj-stack"><span>CNN</span><span>Agri-Tech</span></div>
-        <div class="proj-links">
-          <a href="https://github.com/Ghifar-Khder/crop-disease-yield-prediction" target="_blank">GitHub →</a>
+          <a href="https://github.com/Ghifar-Khder/CAP-Phase-Detection" target="_blank" class="proj-btn proj-btn-code">💻 GitHub Repo</a>
         </div>
       </div>
     </div>
