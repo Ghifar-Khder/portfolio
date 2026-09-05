@@ -150,8 +150,8 @@ nav{
 .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; }
 @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
 
-.hero h1{ font-size:clamp(34px,5.6vw,58px); line-height:1.06; margin-bottom:20px; }
-.hero h1 .accent{ color:var(--signal); }
+.hero h1{ font-size:clamp(30px,4.6vw,46px); line-height:1.15; margin-bottom:14px; letter-spacing:-0.01em; }
+.hero h1 .accent{ color:var(--signal); font-weight:400; }
 .hero p.lead{ font-size:17px; color:var(--text-muted); max-width:520px; margin-bottom:30px; }
 
 .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:34px; }
@@ -423,7 +423,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 
 <header>
   <nav>
-    <div class="logo"><span class="dot"></span> Ghifar Khder</div>
+    <div class="logo"><span class="dot"></span> <span id="liveClock">--:--:--</span></div>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -444,17 +444,9 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Medical Systems Engineering · OvGU Magdeburg</div>
-      <h1>A <span class="accent">curious mind</span> who knows that learning takes time — and has made peace with that.</h1>
-      <p class="lead">M.Sc. student in Medical Systems Engineering at Otto-von-Guericke-Universität Magdeburg — based in Magdeburg, Germany.</p>
-      <div class="tags">
-        <span class="tag">Mathematics</span>
-        <span class="tag">Programming</span>
-        <span class="tag">Deep Learning</span>
-        <span class="tag">Electronics</span>
-      </div>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn btn-primary">See projects</a>
+      <h1>Ghifar Khder <span class="accent">Portfolio</span></h1>
+      <div class="eyebrow" style="margin-top:-6px;">Medical Systems Engineering · OvGU Magdeburg</div>
+      <div class="hero-ctas" style="margin-top:32px;">
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
       <div class="waveform">
@@ -556,7 +548,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       <div class="id-row"><span>Name</span><b>Ghifar Khder</b></div>
       <div class="id-row"><span>Program</span><b>M.Sc. Medical Systems Eng.</b></div>
       <div class="id-row"><span>Institution</span><b>OvGU Magdeburg</b></div>
-      <div class="id-row"><span>Prior degree</span><b>B.Sc. Medizintechnik — 2.0</b></div>
+      <div class="id-row"><span>Prior degree</span><b>B.Sc. Medizintechnik</b></div>
       <div class="id-row"><span>Focus</span><b>Deep Learning · Medical Imaging</b></div>
       <div class="id-row"><span>Languages</span><b>AR · EN (C1) · DE (B2.1→B2.2)</b></div>
       <div class="id-row"><span>Location</span><b>Magdeburg, DE</b></div>
@@ -846,6 +838,17 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---------- live Germany date & time (with seconds) ----------
+const clockEl = document.getElementById('liveClock');
+function updateClock(){
+  const now = new Date();
+  const datePart = new Intl.DateTimeFormat('de-DE', { timeZone:'Europe/Berlin', day:'2-digit', month:'2-digit', year:'numeric' }).format(now);
+  const timePart = new Intl.DateTimeFormat('de-DE', { timeZone:'Europe/Berlin', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }).format(now);
+  clockEl.textContent = `${datePart} · ${timePart}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
