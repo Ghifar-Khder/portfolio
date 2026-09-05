@@ -316,6 +316,9 @@ nav{
 .proj-card:hover .proj-media img{ transform:scale(1.02); }
 .proj-media.dual{ display:grid; grid-template-columns:1fr 1fr; }
 .proj-media.dual img{ height:700px; max-height:700px; }
+.proj-media.stacked{ display:flex; flex-direction:column; }
+.proj-media.stacked img{ width:100%; height:auto; max-height:420px; object-fit:contain; }
+.proj-media.stacked img + img{ border-top:1px solid var(--line); }
 .proj-media.dual::before{
   content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;
   background:var(--line); z-index:2; transform:translateX(-0.5px);
@@ -668,7 +671,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="proj-card wide reveal">
-        <div class="proj-media dual">
+        <div class="proj-media stacked">
           <img src="assets/diabetes1-interface.jpeg" alt="Diabetes prediction app interface">
           <img src="assets/diabetes2-full_diagram.png" alt="Diabetes prediction ensemble pipeline diagram">
         </div>
