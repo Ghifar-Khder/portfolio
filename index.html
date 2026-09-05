@@ -291,7 +291,8 @@ nav{
 
 /* ============ PROJECTS ============ */
 .proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-@media (max-width:760px){ .proj-grid{ grid-template-columns:1fr; } }
+.proj-card.wide{ grid-column:1 / -1; }
+@media (max-width:760px){ .proj-grid{ grid-template-columns:1fr; } .proj-card.wide{ grid-column:auto; } }
 .proj-card{
   background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
   padding:26px; transition:border-color .22s ease, transform .22s ease, box-shadow .22s ease;
@@ -663,7 +664,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
         </div>
       </div>
 
-      <div class="proj-card reveal">
+      <div class="proj-card wide reveal">
         <div class="proj-media dual">
           <img src="assets/diabetes1-interface.jpeg" alt="Diabetes prediction app interface">
           <img src="assets/diabetes2-full_diagram.png" alt="Diabetes prediction ensemble pipeline diagram">
@@ -678,7 +679,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
         </div>
       </div>
 
-      <div class="proj-card reveal">
+      <div class="proj-card wide reveal">
         <div class="proj-media dual">
           <img src="assets/crops1.jpeg" alt="Crop disease and yield prediction app interface, view 1">
           <img src="assets/crops2.jpeg" alt="Crop disease and yield prediction app interface, view 2">
