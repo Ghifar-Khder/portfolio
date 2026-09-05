@@ -317,7 +317,9 @@ nav{
 .proj-media.dual{ display:grid; grid-template-columns:1fr 1fr; }
 .proj-media.dual img{ height:700px; max-height:700px; }
 .proj-media.stacked{ display:flex; flex-direction:column; }
-.proj-media.stacked img{ width:100%; height:auto; max-height:420px; object-fit:contain; }
+.proj-media.stacked img{ width:100%; height:auto; object-fit:contain; }
+.proj-media.stacked img.tall{ max-height:650px; }
+.proj-media.stacked img.wide{ max-height:320px; }
 .proj-media.stacked img + img{ border-top:1px solid var(--line); }
 .proj-media.dual::before{
   content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;
@@ -672,8 +674,8 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 
       <div class="proj-card wide reveal">
         <div class="proj-media stacked">
-          <img src="assets/diabetes1-interface.jpeg" alt="Diabetes prediction app interface">
-          <img src="assets/diabetes2-full_diagram.png" alt="Diabetes prediction ensemble pipeline diagram">
+          <img class="tall" src="assets/diabetes1-interface.jpeg" alt="Diabetes prediction app interface">
+          <img class="wide" src="assets/diabetes2-full_diagram.png" alt="Diabetes prediction ensemble pipeline diagram">
         </div>
         <div class="proj-top"><h3>Diabetes Prediction</h3><span class="proj-link">Live app</span></div>
         <p>Stacked ensemble (ANN, KNN, LightGBM, RBF-SVM, Linear SVM) with a Fuzzy C-Means enhanced ANN meta-learner, on the Pima Indians dataset.</p>
