@@ -305,6 +305,26 @@ nav{
 }
 .proj-card:hover{ border-color:var(--signal); box-shadow:0 18px 36px -20px rgba(0,217,192,.45); }
 .proj-card:hover::after{ opacity:1; }
+.proj-media{
+  aspect-ratio:16/10; margin:-26px -26px 18px -26px;
+  background:var(--panel-2); border-bottom:1px solid var(--line);
+  overflow:hidden; position:relative;
+}
+.proj-media img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+.proj-card:hover .proj-media img{ transform:scale(1.05); }
+.proj-media.dual{ display:grid; grid-template-columns:1fr 1fr; }
+.proj-media.dual::before{
+  content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;
+  background:var(--line); z-index:2; transform:translateX(-0.5px);
+}
+.proj-media .cap{
+  position:absolute; bottom:0; left:0; right:0;
+  padding:16px 12px 8px; font-family:var(--font-mono); font-size:10px;
+  color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em;
+  background:linear-gradient(to top, rgba(10,14,20,.92), transparent);
+  z-index:3;
+}
+.proj-media.dual .cap{ width:100%; }
 .proj-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
 .proj-card h3{ font-size:18px; transition:color .18s ease; }
 .proj-card:hover h3{ color:var(--signal); }
@@ -631,6 +651,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 
     <div class="proj-grid">
       <div class="proj-card reveal">
+        <div class="proj-media"><img src="assets/knee-severe.jpeg" alt="Knee osteoarthritis grading app interface"></div>
         <div class="proj-top"><h3>Knee Osteoarthritis Grading</h3><span class="proj-link">Live app</span></div>
         <p>CNN (ResNet) classifier grading knee osteoarthritis severity (KL 0–4) from X-rays, with Grad-CAM interpretability and Conditional DCGAN class balancing.</p>
         <div class="proj-stack"><span>ResNet</span><span>Grad-CAM</span><span>DCGAN</span><span>Streamlit</span></div>
@@ -641,6 +662,11 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="proj-card reveal">
+        <div class="proj-media dual">
+          <img src="assets/diabetes1-interface.jpeg" alt="Diabetes prediction app interface">
+          <img src="assets/diabetes2-full_diagram.png" alt="Diabetes prediction ensemble pipeline diagram">
+          <div class="cap">Interface · Pipeline diagram</div>
+        </div>
         <div class="proj-top"><h3>Diabetes Prediction</h3><span class="proj-link">Live app</span></div>
         <p>Stacked ensemble (ANN, KNN, LightGBM, RBF-SVM, Linear SVM) with a Fuzzy C-Means enhanced ANN meta-learner, on the Pima Indians dataset.</p>
         <div class="proj-stack"><span>Ensemble Learning</span><span>Machine Learning</span><span>Advanced Data Preprocessing</span><span>FCM</span></div>
@@ -651,6 +677,10 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="proj-card reveal">
+        <div class="proj-media dual">
+          <img src="assets/crops1.jpeg" alt="Crop disease and yield prediction app interface, view 1">
+          <img src="assets/crops2.jpeg" alt="Crop disease and yield prediction app interface, view 2">
+        </div>
         <div class="proj-top"><h3>Crop Disease & Yield Prediction</h3><span class="proj-link">Live app</span></div>
         <p>Plant leaf disease diagnosis and crop yield prediction models applying the same imaging/ML pipeline outside the medical domain.</p>
         <div class="proj-stack"><span>Machine Learning</span><span>Deep Learning</span><span>Transfer Learning</span></div>
@@ -661,6 +691,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="proj-card reveal">
+        <div class="proj-media"><img src="assets/stenosis.jpeg" alt="Coronary stenosis detector app interface"></div>
         <div class="proj-top"><h3>Coronary Stenosis Detector</h3><span class="proj-link">Live app</span></div>
         <p>ResNet101V2-based bounding box regression to localize coronary stenosis on ~8,300 angiographic images, evaluated with IoU-based metrics.</p>
         <div class="proj-stack"><span>ResNet101V2</span><span>Object Detection</span><span>Streamlit</span></div>
@@ -671,6 +702,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
       </div>
 
       <div class="proj-card reveal">
+        <div class="proj-media"><img src="assets/Cap-phase-interface.png" alt="CAP phase detection interface"></div>
         <div class="proj-top"><h3>CAP Phase Detection</h3></div>
         <p>Deep learning model automating Cyclic Alternating Pattern (CAP) sleep-phase classification from single-channel EEG — a basic learning project exploring autonomous physiological signal analysis.</p>
         <div class="proj-stack"><span>EEG</span><span>Deep Learning</span><span>1D CNN</span></div>
