@@ -509,12 +509,12 @@ body.modal-open{ overflow:hidden; }
 /* Internal assembly photo: crop the empty white border in the card without altering the source image */
 .internal-assembly-figure{ position:relative; overflow:hidden; }
 .hardware-gallery .internal-assembly-img{
-  object-fit:cover !important;
+  object-fit:contain !important;
   object-position:center;
-  padding:0 !important;
-  transform:scale(1.18);
+  padding:6px !important;
+  transform:none !important;
 }
-.hardware-gallery .internal-assembly-figure:hover .internal-assembly-img{ transform:scale(1.22); }
+.hardware-gallery .internal-assembly-figure:hover .internal-assembly-img{ transform:none !important; }
 
 </style>
 </head>
