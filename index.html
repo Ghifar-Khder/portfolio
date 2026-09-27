@@ -505,6 +505,17 @@ body.modal-open{ overflow:hidden; }
   .image-lightbox-content img{ max-width:96vw; max-height:84vh; }
 }
 
+
+/* Internal assembly photo: crop the empty white border in the card without altering the source image */
+.internal-assembly-figure{ position:relative; overflow:hidden; }
+.hardware-gallery .internal-assembly-img{
+  object-fit:cover !important;
+  object-position:center;
+  padding:0 !important;
+  transform:scale(1.18);
+}
+.hardware-gallery .internal-assembly-figure:hover .internal-assembly-img{ transform:scale(1.22); }
+
 </style>
 </head>
 <body>
@@ -824,7 +835,7 @@ body.modal-open{ overflow:hidden; }
 
     <div class="hardware-gallery">
       <figure><img src="assets/electronics/oximeter_final_watch.jpg" alt="Final wearable pulse oximeter"><figcaption>Final wearable prototype</figcaption></figure>
-      <figure><img src="assets/electronics/oximeter_internal.jpg" alt="Internal assembly of pulse oximeter"><figcaption>Internal assembly</figcaption></figure>
+      <figure class="internal-assembly-figure"><img class="internal-assembly-img" src="assets/electronics/oximeter_internal.jpg" alt="Internal assembly of pulse oximeter"><figcaption>Internal assembly</figcaption></figure>
       <figure><img src="assets/electronics/oximeter_display.jpg" alt="Pulse oximeter OLED display"><figcaption>On-device measurement screen</figcaption></figure>
     </div>
 
