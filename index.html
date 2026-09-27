@@ -66,6 +66,8 @@ body::before{
 
 a{ color:inherit; text-decoration:none; }
 img{ max-width:100%; display:block; }
+img.clickable-image{ cursor:zoom-in; }
+.proj-media img, .elec-media img, .hardware-gallery img{ object-fit:contain !important; background:var(--panel-2); }
 section{ position:relative; z-index:1; }
 
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
@@ -373,7 +375,7 @@ nav{
   border-bottom:1px solid var(--line); padding:14px;
   position:relative; overflow:hidden;
 }
-.elec-media img, .elec-media video{ width:100%; height:100%; object-fit:cover; position:absolute; inset:0; transition:transform .35s ease; }
+.elec-media img, .elec-media video{ width:100%; height:100%; object-fit:contain; position:absolute; inset:0; transition:transform .35s ease; background:var(--panel-2); }
 .elec-card:hover .elec-media img, .elec-card:hover .elec-media video{ transform:scale(1.06); }
 .elec-body{ padding:18px; }
 .elec-body h4{ font-family:var(--font-display); font-size:16px; margin-bottom:6px; transition:color .18s ease; }
@@ -452,7 +454,7 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
 .hardware-lead{ color:var(--text-muted); max-width:860px; margin-bottom:26px; }
 .hardware-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0 30px; }
 .hardware-gallery figure{ background:var(--panel-2); border:1px solid var(--line); border-radius:9px; overflow:hidden; }
-.hardware-gallery img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+.hardware-gallery img{ width:100%; aspect-ratio:4/3; object-fit:contain; background:var(--panel-2); padding:6px; }
 .hardware-gallery figcaption{ padding:9px 11px; font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); }
 .hardware-detail-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .hardware-detail-block{ background:var(--panel-2); border:1px solid var(--line-soft); border-radius:9px; padding:18px; }
@@ -464,6 +466,43 @@ body.modal-open{ overflow:hidden; }
   .hardware-modal{ padding:12px; }
   .hardware-modal-panel{ padding:26px 18px; max-height:94vh; }
   .hardware-gallery, .hardware-detail-grid{ grid-template-columns:1fr; }
+}
+
+
+/* ============ IMAGE LIGHTBOX ============ */
+.image-lightbox{
+  position:fixed; inset:0; z-index:300; display:none;
+  align-items:center; justify-content:center; padding:28px;
+}
+.image-lightbox.open{ display:flex; }
+.image-lightbox-backdrop{
+  position:absolute; inset:0; background:rgba(2,6,10,.93);
+  backdrop-filter:blur(8px);
+}
+.image-lightbox-content{
+  position:relative; z-index:1; max-width:min(96vw,1500px); max-height:92vh;
+  display:flex; align-items:center; justify-content:center;
+}
+.image-lightbox-content img{
+  max-width:96vw; max-height:90vh; width:auto; height:auto;
+  object-fit:contain; border-radius:10px;
+  box-shadow:0 24px 80px rgba(0,0,0,.65);
+}
+.image-lightbox-close{
+  position:fixed; z-index:2; top:18px; right:22px;
+  width:42px; height:42px; border-radius:9px; cursor:pointer;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(16,21,31,.9); color:#fff; font-size:27px; line-height:1;
+}
+.image-lightbox-caption{
+  position:fixed; z-index:2; left:50%; bottom:18px; transform:translateX(-50%);
+  max-width:80vw; padding:7px 12px; border-radius:7px;
+  background:rgba(10,14,20,.82); color:var(--text-muted);
+  font-family:var(--font-mono); font-size:11px; text-align:center;
+}
+@media(max-width:600px){
+  .image-lightbox{ padding:12px; }
+  .image-lightbox-content img{ max-width:96vw; max-height:84vh; }
 }
 
 </style>
@@ -880,6 +919,16 @@ body.modal-open{ overflow:hidden; }
   </div>
 </section>
 
+
+<div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+  <div class="image-lightbox-backdrop" onclick="closeImageLightbox()"></div>
+  <button class="image-lightbox-close" type="button" onclick="closeImageLightbox()" aria-label="Close image">×</button>
+  <div class="image-lightbox-content">
+    <img id="imageLightboxImg" src="" alt="">
+  </div>
+  <div class="image-lightbox-caption" id="imageLightboxCaption"></div>
+</div>
+
 <footer>
   <div class="wrap footer-row">
     <p>© <span id="year"></span> Ghifar Khder — Medical Systems Engineering</p>
@@ -1032,6 +1081,43 @@ function closeOximeterDetails(){
   document.body.classList.remove('modal-open');
 }
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeOximeterDetails(); });
+
+
+function openImageLightbox(src, alt){
+  const box=document.getElementById('imageLightbox');
+  const img=document.getElementById('imageLightboxImg');
+  const cap=document.getElementById('imageLightboxCaption');
+  img.src=src;
+  img.alt=alt || 'Expanded image';
+  cap.textContent=alt || '';
+  box.classList.add('open');
+  box.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeImageLightbox(){
+  const box=document.getElementById('imageLightbox');
+  if(!box) return;
+  box.classList.remove('open');
+  box.setAttribute('aria-hidden','true');
+  document.getElementById('imageLightboxImg').src='';
+  document.body.classList.remove('modal-open');
+}
+document.querySelectorAll('main img, section img, .hardware-modal img').forEach(img=>{
+  if(img.classList.contains('id-photo')) return;
+  img.classList.add('clickable-image');
+  img.setAttribute('tabindex','0');
+  img.setAttribute('role','button');
+  img.addEventListener('click',()=>openImageLightbox(img.currentSrc || img.src,img.alt));
+  img.addEventListener('keydown',e=>{
+    if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openImageLightbox(img.currentSrc || img.src,img.alt); }
+  });
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeImageLightbox();
+    closeOximeterDetails();
+  }
+});
 
 </script>
 
