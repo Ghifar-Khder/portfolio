@@ -426,6 +426,46 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
   .reveal{ opacity:1; transform:none; transition:none; }
   html{ scroll-behavior:auto; }
 }
+
+/* ============ HARDWARE PROJECT DETAILS ============ */
+.hardware-details-btn{
+  margin-top:16px; width:100%; cursor:pointer;
+  border:1px solid rgba(224,138,75,.45); background:var(--copper-dim); color:var(--copper);
+  font-family:var(--font-mono); font-size:12.5px; padding:11px 14px; border-radius:7px;
+  transition:transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.hardware-details-btn:hover{ transform:translateY(-1px); background:rgba(224,138,75,.22); border-color:var(--copper); }
+.hardware-modal{ position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; padding:28px; }
+.hardware-modal.open{ display:flex; }
+.hardware-modal-backdrop{ position:absolute; inset:0; background:rgba(3,7,12,.82); backdrop-filter:blur(8px); }
+.hardware-modal-panel{
+  position:relative; z-index:1; width:min(1050px,100%); max-height:90vh; overflow:auto;
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:34px;
+  box-shadow:0 30px 90px rgba(0,0,0,.55);
+}
+.hardware-modal-close{
+  position:absolute; top:16px; right:18px; width:38px; height:38px; cursor:pointer;
+  border:1px solid var(--line); border-radius:8px; background:var(--panel-2); color:var(--text);
+  font-size:24px; line-height:1;
+}
+.hardware-modal-panel h2{ font-size:clamp(26px,4vw,38px); margin-bottom:12px; }
+.hardware-lead{ color:var(--text-muted); max-width:860px; margin-bottom:26px; }
+.hardware-gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0 30px; }
+.hardware-gallery figure{ background:var(--panel-2); border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.hardware-gallery img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+.hardware-gallery figcaption{ padding:9px 11px; font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); }
+.hardware-detail-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.hardware-detail-block{ background:var(--panel-2); border:1px solid var(--line-soft); border-radius:9px; padding:18px; }
+.hardware-detail-block h3{ font-size:15px; color:var(--copper); margin-bottom:8px; }
+.hardware-detail-block p{ color:var(--text-muted); font-size:13.5px; }
+.hardware-note{ margin-top:18px; padding:13px 15px; border-left:3px solid var(--copper); background:var(--copper-dim); color:var(--text-muted); font-size:12.5px; }
+body.modal-open{ overflow:hidden; }
+@media(max-width:760px){
+  .hardware-modal{ padding:12px; }
+  .hardware-modal-panel{ padding:26px 18px; max-height:94vh; }
+  .hardware-gallery, .hardware-detail-grid{ grid-template-columns:1fr; }
+}
+
 </style>
 </head>
 <body>
@@ -698,45 +738,87 @@ footer{ padding:36px 0; border-top:1px solid var(--line-soft); }
   <div class="wrap">
     <div class="eyebrow">Hardware Projects</div>
     <h2 class="section-title reveal">Hardware Projects</h2>
-    <p class="section-sub reveal">Hands-on electronics projects. Replace the placeholders below with your own photos and video clips.</p>
+    <p class="section-sub reveal">Biomedical electronics and embedded systems built as working prototypes.</p>
 
     <div class="elec-grid">
-      <div class="elec-card reveal">
+      <div class="elec-card reveal oximeter-card">
         <div class="elec-media">
-          Add photo / video<br>assets/electronics/project1.*
+          <img src="assets/electronics/oximeter_final_watch.jpg" alt="Wearable pulse oximeter final prototype">
         </div>
         <div class="elec-body">
-          <h4>Project name</h4>
-          <p>One or two lines describing the build, the components used, and what it does.</p>
+          <h4>Wearable Pulse Oximeter</h4>
+          <p>A compact wrist-worn prototype that measures SpO₂ and heart rate, shows the readings on-device, and can stream them over Wi-Fi for browser-based monitoring.</p>
+          <div class="proj-stack">
+            <span>MAX30100</span><span>ESP32</span><span>OLED</span><span>Wi-Fi</span><span>Embedded Systems</span>
+          </div>
+          <button class="hardware-details-btn" type="button" onclick="openOximeterDetails()">View Details →</button>
         </div>
       </div>
-      <div class="elec-card reveal">
-        <div class="elec-media">
-          Add photo / video<br>assets/electronics/project2.*
-        </div>
-        <div class="elec-body">
-          <h4>Project name</h4>
-          <p>One or two lines describing the build, the components used, and what it does.</p>
-        </div>
-      </div>
-      <div class="elec-card reveal">
-        <div class="elec-media">
-          Add photo / video<br>assets/electronics/project3.*
-        </div>
-        <div class="elec-body">
-          <h4>Project name</h4>
-          <p>One or two lines describing the build, the components used, and what it does.</p>
-        </div>
-      </div>
-    </div>
 
-    <div class="placeholder-note reveal">
-      <b>To fill this in:</b> drop your images/videos into <code>assets/electronics/</code>, then in the HTML swap each
-      <code>.elec-media</code> placeholder div for <code>&lt;img src="assets/electronics/yourfile.jpg"&gt;</code> or
-      <code>&lt;video src="assets/electronics/yourfile.mp4" controls&gt;&lt;/video&gt;</code>, and update the title/description text.
+      <div class="elec-card reveal">
+        <div class="elec-media">Next hardware project</div>
+        <div class="elec-body">
+          <h4>More coming soon</h4>
+          <p>Additional electronics and biomedical hardware projects will be added here.</p>
+        </div>
+      </div>
+
+      <div class="elec-card reveal">
+        <div class="elec-media">Next hardware project</div>
+        <div class="elec-body">
+          <h4>More coming soon</h4>
+          <p>Additional electronics and biomedical hardware projects will be added here.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="hardware-modal" id="oximeterDetails" aria-hidden="true">
+  <div class="hardware-modal-backdrop" onclick="closeOximeterDetails()"></div>
+  <div class="hardware-modal-panel" role="dialog" aria-modal="true" aria-labelledby="oximeterTitle">
+    <button class="hardware-modal-close" type="button" onclick="closeOximeterDetails()" aria-label="Close">×</button>
+
+    <div class="eyebrow">Biomedical Electronics</div>
+    <h2 id="oximeterTitle">Wearable Pulse Oximeter</h2>
+    <p class="hardware-lead">This project turns a pulse-oximetry sensor, a compact ESP32 setup, and a small OLED into a wearable monitoring prototype. The goal was to keep the device self-contained: sensing, processing, display, battery power and wireless access all fit into a modified watch-style enclosure.</p>
+
+    <div class="hardware-gallery">
+      <figure><img src="assets/electronics/oximeter_final_watch.jpg" alt="Final wearable pulse oximeter"><figcaption>Final wearable prototype</figcaption></figure>
+      <figure><img src="assets/electronics/oximeter_internal.jpg" alt="Internal assembly of pulse oximeter"><figcaption>Internal assembly</figcaption></figure>
+      <figure><img src="assets/electronics/oximeter_display.jpg" alt="Pulse oximeter OLED display"><figcaption>On-device measurement screen</figcaption></figure>
+    </div>
+
+    <div class="hardware-detail-grid">
+      <div class="hardware-detail-block">
+        <h3>What it does</h3>
+        <p>The MAX30100 collects the optical pulse signal from the skin. The ESP32 reads the sensor over I²C, processes the available SpO₂ and pulse-rate data, and updates the OLED interface. The same controller also manages the user controls, battery monitoring and wireless connection.</p>
+      </div>
+      <div class="hardware-detail-block">
+        <h3>Main hardware</h3>
+        <p>MAX30100 optical pulse-oximetry sensor, ESP32-WROOM-32, 1.3-inch 128×64 SH1106 OLED, 3.7 V lithium battery, boost/charging module, 3.3 V regulation, rotary encoder, push button and a modified watch enclosure.</p>
+      </div>
+      <div class="hardware-detail-block">
+        <h3>Build process</h3>
+        <p>The system was first assembled around the ESP32 development board so the sensor, display and controls could be tested separately. After the firmware and interface were stable, the design was reduced in size: the ESP32 module and power electronics were integrated directly, the enclosure was modified to hold the electronics, and the sensor was positioned against the underside of the wrist.</p>
+      </div>
+      <div class="hardware-detail-block">
+        <h3>Power & interface</h3>
+        <p>A rechargeable 3.7 V lithium cell powers the device. The power stage generates the required supply rails, while the firmware also monitors battery voltage. The OLED shows SpO₂, BPM, time, battery state and connection status. A rotary encoder and push button are used to move through settings and controls.</p>
+      </div>
+      <div class="hardware-detail-block">
+        <h3>Wireless monitoring</h3>
+        <p>The ESP32 can create its own access point or join an existing Wi-Fi network. A small web server exposes the current measurements to a browser and keeps a rolling 24-hour measurement log that can be exported as CSV.</p>
+      </div>
+      <div class="hardware-detail-block">
+        <h3>Testing</h3>
+        <p>The completed prototype was compared with a commercial fingertip pulse oximeter across repeated measurements. The readings stayed close to the reference device, while testing also showed that firm and consistent sensor contact with the wrist is important for a stable optical signal.</p>
+      </div>
+    </div>
+
+    <div class="hardware-note">Prototype developed for engineering and educational work; it is not a certified medical device.</div>
+  </div>
+</div>
 
 <!-- ============ EDUCATION ============ -->
 <section class="section" id="education">
@@ -936,6 +1018,21 @@ burger.addEventListener('click', ()=>{
   links.style.padding = '20px 28px';
   links.style.borderBottom = '1px solid #212B3A';
 });
+
+function openOximeterDetails(){
+  const modal = document.getElementById('oximeterDetails');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeOximeterDetails(){
+  const modal = document.getElementById('oximeterDetails');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeOximeterDetails(); });
+
 </script>
 
 </body>
