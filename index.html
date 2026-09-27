@@ -480,12 +480,22 @@ body.modal-open{ overflow:hidden; }
   backdrop-filter:blur(8px);
 }
 .image-lightbox-content{
-  position:relative; z-index:1; max-width:min(96vw,1500px); max-height:92vh;
-  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  z-index:1;
+  width:96vw;
+  height:92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .image-lightbox-content img{
-  max-width:96vw; max-height:90vh; width:auto; height:auto;
-  object-fit:contain; border-radius:10px;
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  border-radius:10px;
   box-shadow:0 24px 80px rgba(0,0,0,.65);
 }
 .image-lightbox-close{
@@ -501,8 +511,13 @@ body.modal-open{ overflow:hidden; }
   font-family:var(--font-mono); font-size:11px; text-align:center;
 }
 @media(max-width:600px){
-  .image-lightbox{ padding:12px; }
-  .image-lightbox-content img{ max-width:96vw; max-height:84vh; }
+  .image-lightbox{ padding:8px; }
+  .image-lightbox-content{ width:98vw; height:88vh; }
+  .image-lightbox-content img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+  }
 }
 
 
@@ -557,10 +572,14 @@ body.modal-open{ overflow:hidden; }
 }
 .cpr-video-wrap video{
   display:block;
-  width:100%;
-  max-height:70vh;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  max-height:78vh;
+  margin:0 auto;
   border-radius:9px;
   background:#000;
+  object-fit:contain;
 }
 .cpr-video-caption{
   margin-top:8px;
@@ -964,7 +983,7 @@ body.modal-open{ overflow:hidden; }
 
     <div class="cpr-video-wrap">
       <video controls playsinline preload="metadata">
-        <source src="assets/electronics/cpr_demo.mp4" type="video/mp4">
+        <source src="assets/electronics/video-Trim.mp4" type="video/mp4">
         Your browser does not support the video element.
       </video>
       <div class="cpr-video-caption">Prototype operation</div>
