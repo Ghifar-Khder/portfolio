@@ -516,6 +516,27 @@ body.modal-open{ overflow:hidden; }
 }
 .hardware-gallery .internal-assembly-figure:hover .internal-assembly-img{ transform:none !important; }
 
+
+/* Internal assembly: keep the real photo at its natural ratio with no crop or stretched empty area */
+.hardware-gallery .internal-assembly-figure{
+  align-self:start;
+  height:auto !important;
+}
+.hardware-gallery .internal-assembly-figure .internal-assembly-img{
+  display:block;
+  width:100%;
+  height:auto !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:0 !important;
+  transform:none !important;
+  background:transparent !important;
+}
+.hardware-gallery .internal-assembly-figure:hover .internal-assembly-img{
+  transform:none !important;
+}
+
 </style>
 </head>
 <body>
