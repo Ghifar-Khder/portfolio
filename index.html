@@ -895,11 +895,17 @@ body.modal-open{ overflow:hidden; }
         </div>
       </div>
 
-      <div class="elec-card reveal">
-        <div class="elec-media">Next hardware project</div>
+      <div class="elec-card reveal glucose-card">
+        <div class="elec-media">
+          <img src="assets/electronics/01_optical_glucose_monitor_final_device_enhanced.jpg" alt="Optical glucose measurement prototype with finger clip and LCD">
+        </div>
         <div class="elec-body">
-          <h4>More coming soon</h4>
-          <p>Additional electronics and biomedical hardware projects will be added here.</p>
+          <h4>Optical Glucose Measurement Prototype</h4>
+          <p>An experimental non-invasive prototype that sends 940 nm infrared light through a finger, conditions the detected optical signal, and maps the measured voltage to an estimated glucose value shown on an LCD.</p>
+          <div class="proj-stack">
+            <span>940 nm IR</span><span>PT908</span><span>LM358</span><span>Arduino Uno</span><span>LCD</span>
+          </div>
+          <button class="hardware-details-btn" type="button" onclick="openGlucoseDetails()">View Details →</button>
         </div>
       </div>
     </div>
@@ -1023,6 +1029,71 @@ body.modal-open{ overflow:hidden; }
     </div>
 
     <div class="hardware-note">Engineering/educational prototype only. It was tested and calibrated at prototype level; it is not a clinically validated CPR device.</div>
+  </div>
+</div>
+
+
+<div class="hardware-modal" id="glucoseDetails" aria-hidden="true">
+  <div class="hardware-modal-backdrop" onclick="closeGlucoseDetails()"></div>
+  <div class="hardware-modal-panel" role="dialog" aria-modal="true" aria-labelledby="glucoseTitle">
+    <button class="hardware-modal-close" type="button" onclick="closeGlucoseDetails()" aria-label="Close">×</button>
+
+    <div class="eyebrow">Biomedical Electronics &amp; Optical Sensing</div>
+    <h2 id="glucoseTitle">Optical Glucose Measurement Prototype</h2>
+    <p class="hardware-lead">This project is an experimental optical glucose-estimation prototype built around a modified finger clip. Infrared light is transmitted through the finger, the detected signal is amplified and filtered, and an Arduino applies an experimentally fitted calibration equation to display an estimated glucose value.</p>
+
+    <div class="hardware-gallery">
+      <figure>
+        <img src="assets/electronics/01_optical_glucose_monitor_final_device_enhanced.jpg" alt="Completed optical glucose measurement prototype">
+        <figcaption>Completed optical glucose-measurement prototype</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/electronics/02_glucose_reading_102mgdl_enhanced.jpg" alt="Optical glucose prototype displaying a 102 mg/dL estimate">
+        <figcaption>Example glucose estimate on the LCD</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/electronics/03_error_missing_enhanced.jpg" alt="Optical glucose prototype error message for invalid or missing input">
+        <figcaption>Invalid or missing-input error state</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/electronics/04_put_your_finger_enhanced.jpg" alt="Optical glucose prototype finger-position error message">
+        <figcaption>Finger-position error message</figcaption>
+      </figure>
+    </div>
+
+    <div class="hardware-detail-grid">
+      <div class="hardware-detail-block">
+        <h3>What it does</h3>
+        <p>A 940 nm infrared emitter and a PT908 phototransistor are mounted on opposite sides of a modified pulse-oximeter finger clip. The system measures the transmitted optical signal through the finger and converts the conditioned sensor voltage into an estimated glucose value.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Optical &amp; electronic hardware</h3>
+        <p>The prototype uses a 940 nm infrared emitter, PT908 phototransistor, BC327 transistor LED driver, LM358 op-amp, Arduino Uno/ATmega328P controller, LCD, push button and a 5 V supply. The clip fixes the emitter and detector opposite one another and helps reduce ambient-light interference.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Signal conditioning</h3>
+        <p>The phototransistor signal is amplified with an LM358 non-inverting stage at about 2.5× gain. A low-pass filter around 15 Hz follows the amplifier to reduce electrical noise and pulse-related fluctuations before the Arduino reads the analog signal.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Calibration</h3>
+        <p>Paired measurements were collected using the prototype sensor voltage and a conventional invasive home glucometer. The data were fitted in Excel to obtain a project-specific calibration equation, which was then implemented in the Arduino firmware.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Interface &amp; measurement modes</h3>
+        <p>The firmware supports a single measurement from a short button press and a continuous mode from a long press. The LCD shows the calculated estimate and explicit error messages for invalid use, including missing or badly positioned fingers.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Prototype testing</h3>
+        <p>The completed sensor, amplifier, controller and display were integrated into a portable prototype. In the reported project comparison, the readings were approximately 92% close to the invasive home-meter readings. This was prototype-level testing rather than clinical validation.</p>
+      </div>
+    </div>
+
+    <div class="hardware-note">Experimental engineering prototype only. It is not a certified glucose meter and must not be used for diagnosis, treatment or insulin-dosing decisions.</div>
   </div>
 </div>
 
@@ -1283,9 +1354,27 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
     closeImageLightbox();
     closeOximeterDetails();
+    closeCPRDetails();
+    closeGlucoseDetails();
   }
 });
 
+
+
+function openGlucoseDetails(){
+  const modal=document.getElementById('glucoseDetails');
+  if(!modal) return;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeGlucoseDetails(){
+  const modal=document.getElementById('glucoseDetails');
+  if(!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
 
 function openCPRDetails(){
   const modal=document.getElementById('cprDetails');
