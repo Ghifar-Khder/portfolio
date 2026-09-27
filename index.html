@@ -537,6 +537,42 @@ body.modal-open{ overflow:hidden; }
   transform:none !important;
 }
 
+
+/* CPR project media */
+.cpr-gallery{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+.cpr-gallery .cpr-cover-figure{ grid-column:1/-1; }
+.cpr-gallery img{
+  width:100%;
+  height:auto !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  background:var(--panel-2);
+}
+.cpr-video-wrap{
+  margin-top:18px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--panel-2);
+}
+.cpr-video-wrap video{
+  display:block;
+  width:100%;
+  max-height:70vh;
+  border-radius:9px;
+  background:#000;
+}
+.cpr-video-caption{
+  margin-top:8px;
+  color:var(--text-muted);
+  font-family:var(--font-mono);
+  font-size:11px;
+}
+@media(max-width:700px){
+  .cpr-gallery{ grid-template-columns:1fr; }
+  .cpr-gallery .cpr-cover-figure{ grid-column:auto; }
+}
+
 </style>
 </head>
 <body>
@@ -828,7 +864,7 @@ body.modal-open{ overflow:hidden; }
 
       <div class="elec-card reveal cpr-card">
         <div class="elec-media">
-          <img src="assets/electronics/cpr_closed.jpg?v=2" alt="Automatic CPR compression prototype in final enclosure">
+          <img src="assets/electronics/cpr_cover.jpg" alt="Automatic CPR compression prototype showing the wooden enclosure and internal mechanism">
         </div>
         <div class="elec-body">
           <h4>Automatic CPR Compression Prototype</h4>
@@ -907,15 +943,31 @@ body.modal-open{ overflow:hidden; }
     <h2 id="cprTitle">Automatic CPR Compression Prototype</h2>
     <p class="hardware-lead">This project is a non-programmable mechanical/electronic CPR compression prototype. A DC motor drives a rack-and-pinion mechanism to create the linear stroke, while discrete control circuitry reverses the motor at the stroke endpoints and provides selectable compression depth and adjustable cycle rate.</p>
 
-    <div class="hardware-gallery">
-      <figure>
-        <img src="assets/electronics/cpr_open.jpg?v=2" alt="Completed CPR prototype with enclosure open">
-        <figcaption>Final prototype — enclosure open</figcaption>
+    <div class="hardware-gallery cpr-gallery">
+      <figure class="cpr-cover-figure">
+        <img src="assets/electronics/cpr_cover.jpg" alt="Automatic CPR prototype showing the wooden enclosure and internal electronics">
+        <figcaption>Completed prototype — enclosure and internal assembly</figcaption>
       </figure>
       <figure>
-        <img src="assets/electronics/cpr_closed.jpg?v=2" alt="Completed CPR prototype in final wooden enclosure">
-        <figcaption>Final prototype — closed enclosure</figcaption>
+        <img src="assets/electronics/cpr_internal.jpg" alt="Completed CPR prototype with enclosure open showing integrated electronics and mechanism">
+        <figcaption>Internal electronics and mechanism</figcaption>
       </figure>
+      <figure>
+        <img src="assets/electronics/cpr_rack.jpg" alt="Rack with copper position contacts">
+        <figcaption>Rack with copper position contacts</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/electronics/cpr_position_circuit.jpg" alt="Position-sensing circuit">
+        <figcaption>Position-sensing circuit</figcaption>
+      </figure>
+    </div>
+
+    <div class="cpr-video-wrap">
+      <video controls playsinline preload="metadata">
+        <source src="assets/electronics/cpr_demo.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+      <div class="cpr-video-caption">Prototype operation</div>
     </div>
 
     <div class="hardware-detail-grid">
