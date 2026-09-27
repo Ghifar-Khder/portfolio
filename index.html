@@ -826,11 +826,17 @@ body.modal-open{ overflow:hidden; }
         </div>
       </div>
 
-      <div class="elec-card reveal">
-        <div class="elec-media">Next hardware project</div>
+      <div class="elec-card reveal cpr-card">
+        <div class="elec-media">
+          <img class="b64-image" data-b64-src="assets/electronics/cpr_closed.b64" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Automatic CPR compression prototype in final enclosure">
+        </div>
         <div class="elec-body">
-          <h4>More coming soon</h4>
-          <p>Additional electronics and biomedical hardware projects will be added here.</p>
+          <h4>Automatic CPR Compression Prototype</h4>
+          <p>A mechanical-electronic prototype that converts DC-motor rotation into controlled linear compression, with selectable 4, 5 and 6 cm stroke settings and adjustable compression rate.</p>
+          <div class="proj-stack">
+            <span>DC Motor</span><span>Rack &amp; Pinion</span><span>L298N</span><span>LM358</span><span>CD4017</span><span>NE555</span>
+          </div>
+          <button class="hardware-details-btn" type="button" onclick="openCPRDetails()">View Details →</button>
         </div>
       </div>
 
@@ -888,6 +894,63 @@ body.modal-open{ overflow:hidden; }
     </div>
 
     <div class="hardware-note">Prototype developed for engineering and educational work; it is not a certified medical device.</div>
+  </div>
+</div>
+
+
+<div class="hardware-modal" id="cprDetails" aria-hidden="true">
+  <div class="hardware-modal-backdrop" onclick="closeCPRDetails()"></div>
+  <div class="hardware-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cprTitle">
+    <button class="hardware-modal-close" type="button" onclick="closeCPRDetails()" aria-label="Close">×</button>
+
+    <div class="eyebrow">Biomedical Mechanics &amp; Electronics</div>
+    <h2 id="cprTitle">Automatic CPR Compression Prototype</h2>
+    <p class="hardware-lead">This project is a non-programmable mechanical/electronic CPR compression prototype. A DC motor drives a rack-and-pinion mechanism to create the linear stroke, while discrete control circuitry reverses the motor at the stroke endpoints and provides selectable compression depth and adjustable cycle rate.</p>
+
+    <div class="hardware-gallery">
+      <figure>
+        <img class="b64-image" data-b64-src="assets/electronics/cpr_open.b64" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Completed CPR prototype with enclosure open">
+        <figcaption>Final prototype — enclosure open</figcaption>
+      </figure>
+      <figure>
+        <img class="b64-image" data-b64-src="assets/electronics/cpr_closed.b64" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Completed CPR prototype in final wooden enclosure">
+        <figcaption>Final prototype — closed enclosure</figcaption>
+      </figure>
+    </div>
+
+    <div class="hardware-detail-grid">
+      <div class="hardware-detail-block">
+        <h3>Mechanical system</h3>
+        <p>A DC motor is coupled to a pinion that drives a straight rack. This converts rotary motion into the forward-and-return linear movement used for the compression stroke. The mechanism was aligned and tested so the rack could move through the full travel without binding.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Motor direction control</h3>
+        <p>An L298N H-bridge reverses the motor polarity. A CD4017 counter provides the alternating direction states: one state drives the compression stroke and the next drives retraction. The home switch and depth-detection circuit generate the events that change direction.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Depth selection</h3>
+        <p>Copper contact sections are positioned along the moving rack and connected through a resistor network. A carbon brush reads the resulting position voltage. An LM358 comparator and a three-position selector provide the three implemented stroke settings: 4, 5 and 6 cm.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Endpoint &amp; debounce circuit</h3>
+        <p>A limit switch marks the fully retracted home position. Practical testing showed that mechanical switch bounce produced unwanted extra transitions, so an RC low-pass filter and a NE555 monostable pulse shaper were added to produce one clean control pulse per endpoint event.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Power &amp; rate adjustment</h3>
+        <p>The prototype uses two lithium cells in series. An LM7805 supplies the 5 V control electronics, while an XL4015 converter provides an adjustable motor supply. Changing the motor voltage changes the compression rate, which was calibrated separately for the different stroke lengths.</p>
+      </div>
+
+      <div class="hardware-detail-block">
+        <h3>Integration &amp; testing</h3>
+        <p>The actuator and control circuits were first tested separately, then integrated into the wooden enclosure. Repeated test cycles were used to confirm clean reversal at both endpoints, repeatable 4/5/6 cm travel and a target operating range of about 100–120 compressions per minute.</p>
+      </div>
+    </div>
+
+    <div class="hardware-note">Engineering/educational prototype only. It was tested and calibrated at prototype level; it is not a clinically validated CPR device.</div>
   </div>
 </div>
 
@@ -1150,6 +1213,35 @@ document.addEventListener('keydown',e=>{
     closeOximeterDetails();
   }
 });
+
+
+function openCPRDetails(){
+  const modal=document.getElementById('cprDetails');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeCPRDetails(){
+  const modal=document.getElementById('cprDetails');
+  if(!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
+async function loadBase64PortfolioImages(){
+  const imgs=document.querySelectorAll('img[data-b64-src]');
+  for(const img of imgs){
+    try{
+      const r=await fetch(img.dataset.b64Src,{cache:'no-store'});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const b64=(await r.text()).trim();
+      img.src='data:image/jpeg;base64,'+b64;
+    }catch(e){
+      console.error('Could not load portfolio image:',img.dataset.b64Src,e);
+    }
+  }
+}
+loadBase64PortfolioImages();
 
 </script>
 
