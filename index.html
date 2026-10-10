@@ -149,10 +149,12 @@ nav{
 
 /* ============ HERO ============ */
 .hero{ padding:150px 0 90px; }
-.hero-grid{ display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:56px; align-items:center; }
-.hero-portrait{width:100%;max-width:260px;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 18px 48px rgba(0,0,0,.25);}
-@media (max-width:900px){.hero-portrait{width:180px;grid-row:1;justify-self:start;}.hero-grid{gap:28px;}}
-@media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:28px 56px;align-items:center;}
+.hero-portrait{width:220px;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:var(--radius);border:1px solid rgba(0,217,192,.25);box-shadow:0 14px 30px -12px rgba(0,217,192,.32);transition:transform .22s ease,box-shadow .22s ease;will-change:transform;}
+.hero-portrait:hover{box-shadow:0 18px 36px -12px rgba(0,217,192,.45);}
+.hero-grid > .waveform{grid-column:1/-1;margin-top:0;}
+@media (max-width:640px){.hero-grid{grid-template-columns:1fr;gap:24px;}.hero-portrait{width:160px;grid-row:1;justify-self:start;}}
+@media (prefers-reduced-motion:reduce){.hero-portrait{transition:none;will-change:auto;}}
 
 .hero h1{ font-size:clamp(30px,4.6vw,46px); line-height:1.15; margin-bottom:14px; letter-spacing:-0.01em; }
 .hero h1 .accent{ color:var(--signal); font-weight:400; }
@@ -687,6 +689,8 @@ html[lang="de"] .id-row b{text-align:right;}
         </details>
         <a href="#contact" class="btn btn-ghost">Get in touch</a>
       </div>
+    </div>
+    <img class="hero-portrait" src="assets/profile.JPEG" alt="Ghifar Khder" width="220" height="275" fetchpriority="high">
       <div class="waveform">
         <svg viewBox="0 0 820 195" fill="none" xmlns="http://www.w3.org/2000/svg" id="waveSvg">
           <defs>
@@ -775,8 +779,6 @@ html[lang="de"] .id-row b{text-align:right;}
           </g>
         </svg>
       </div>
-    </div>
-    <img class="hero-portrait" src="assets/profile.JPEG" alt="Ghifar Khder" width="260" height="325" fetchpriority="high">
   </div>
 </section>
 
@@ -1350,6 +1352,18 @@ if(!reduceMotion){
     });
     btn.addEventListener('mouseleave', function(){ this.style.transform = ''; });
   });
+}
+
+// Subtle portrait movement, matching the button hover response.
+const portrait = document.querySelector('.hero-portrait');
+if(portrait && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  portrait.addEventListener('mousemove', e=>{
+    const r=portrait.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.025;
+    const y=(e.clientY-r.top-r.height/2)*0.025;
+    portrait.style.transform=`translate(${x}px,${y-2}px)`;
+  });
+  portrait.addEventListener('mouseleave', ()=>{portrait.style.transform='';});
 }
 
 // ---------- mobile nav ----------
