@@ -1,0 +1,400 @@
+[
+  {
+    "argv": [
+      "kicad-cli",
+      "version"
+    ],
+    "returncode": 0,
+    "output": "9.0.7\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "fp",
+      "upgrade",
+      "--force",
+      "/work/projects/centerline_75mm/CoilParts.pretty"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "netlist",
+      "--format",
+      "kicadxml",
+      "--output",
+      "/work/validation/centerline_75mm/schematic.net.xml",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "erc",
+      "--format",
+      "json",
+      "--severity-all",
+      "--exit-code-violations",
+      "--output",
+      "/work/validation/centerline_75mm/erc.json",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": "You have run CvPcb for the first time using the new footprint library table method for finding footprints.\nCvPcb has either copied the default table or created an empty table in your home folder.\nYou must first configure the library table to include all footprint libraries not included with KiCad.\nSee the \u201cFootprint Library Table\u201d section of the CvPcb documentation for more information. Found 0 violations\nSaved ERC Report to /work/validation/centerline_75mm/erc.json\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "drc",
+      "--schematic-parity",
+      "--format",
+      "json",
+      "--severity-all",
+      "--exit-code-violations",
+      "--output",
+      "/work/validation/centerline_75mm/drc.json",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Found 0 violations\nFound 0 unconnected items\nFound 0 schematic parity issues\nSaved DRC Report to /work/validation/centerline_75mm/drc.json\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "svg",
+      "--output",
+      "/work/projects/centerline_75mm/exports/preview/",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/centerline_75mm/exports/preview/rx_coil_3t.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,F.SilkS,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--output",
+      "/work/projects/centerline_75mm/exports/preview/pcb_top.svg",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/centerline_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--output",
+      "/work/projects/centerline_75mm/exports/preview/front_copper.svg",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/centerline_75mm/exports/preview/front_copper.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,Edge.Cuts",
+      "--output",
+      "/work/projects/centerline_75mm/exports/gerber_review/",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-F_Cu.gtl'.\nPlotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-B_Cu.gbl'.\nPlotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-F_Silkscreen.gto'.\nPlotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-F_Mask.gts'.\nPlotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-B_Mask.gbs'.\nPlotted to '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-Edge_Cuts.gm1'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,Edge.Cuts",
+      "--no-x2",
+      "--no-netlist",
+      "--disable-aperture-macros",
+      "--output",
+      "/work/projects/centerline_75mm/exports/lpkf_rs274x_review/",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/centerline_75mm/exports/lpkf_rs274x_review/rx_coil_3t-F_Cu.gtl'.\nPlotted to '/work/projects/centerline_75mm/exports/lpkf_rs274x_review/rx_coil_3t-Edge_Cuts.gm1'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "drill",
+      "--format",
+      "excellon",
+      "--excellon-units",
+      "mm",
+      "--generate-map",
+      "--map-format",
+      "gerberx2",
+      "--output",
+      "/work/projects/centerline_75mm/exports/gerber_review/",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Created file '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t.drl'\nCreated file '/work/projects/centerline_75mm/exports/gerber_review/rx_coil_3t-drl_map.gbr'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pos",
+      "--format",
+      "csv",
+      "--units",
+      "mm",
+      "--side",
+      "front",
+      "--output",
+      "/work/projects/centerline_75mm/exports/placement_front.csv",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Wrote position data to '/work/projects/centerline_75mm/exports/placement_front.csv'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "step",
+      "--force",
+      "--subst-models",
+      "--output",
+      "/work/projects/centerline_75mm/exports/assembly_review.step",
+      "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCould not add 3D model for J1.\nFile not found: ${KIPRJMOD}/3dmodels/SMA_Amphenol_132134_Vertical.step\nCreate PCB solid model.\nBoard outline: found 200 initial points.\nBuild board outlines (1 outlines) with 200 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/centerline_75mm/exports/assembly_review.step' created.\n\nExport time 0.040 s\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "fp",
+      "upgrade",
+      "--force",
+      "/work/projects/outer_75mm/CoilParts.pretty"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "netlist",
+      "--format",
+      "kicadxml",
+      "--output",
+      "/work/validation/outer_75mm/schematic.net.xml",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": ""
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "erc",
+      "--format",
+      "json",
+      "--severity-all",
+      "--exit-code-violations",
+      "--output",
+      "/work/validation/outer_75mm/erc.json",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": "Found 0 violations\nSaved ERC Report to /work/validation/outer_75mm/erc.json\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "drc",
+      "--schematic-parity",
+      "--format",
+      "json",
+      "--severity-all",
+      "--exit-code-violations",
+      "--output",
+      "/work/validation/outer_75mm/drc.json",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Found 0 violations\nFound 0 unconnected items\nFound 0 schematic parity issues\nSaved DRC Report to /work/validation/outer_75mm/drc.json\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "svg",
+      "--output",
+      "/work/projects/outer_75mm/exports/preview/",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_sch"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/outer_75mm/exports/preview/rx_coil_3t.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,F.SilkS,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--output",
+      "/work/projects/outer_75mm/exports/preview/pcb_top.svg",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/outer_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--output",
+      "/work/projects/outer_75mm/exports/preview/front_copper.svg",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/outer_75mm/exports/preview/front_copper.svg'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,Edge.Cuts",
+      "--output",
+      "/work/projects/outer_75mm/exports/gerber_review/",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-F_Cu.gtl'.\nPlotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-B_Cu.gbl'.\nPlotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-F_Silkscreen.gto'.\nPlotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-F_Mask.gts'.\nPlotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-B_Mask.gbs'.\nPlotted to '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-Edge_Cuts.gm1'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,Edge.Cuts",
+      "--no-x2",
+      "--no-netlist",
+      "--disable-aperture-macros",
+      "--output",
+      "/work/projects/outer_75mm/exports/lpkf_rs274x_review/",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Plotted to '/work/projects/outer_75mm/exports/lpkf_rs274x_review/rx_coil_3t-F_Cu.gtl'.\nPlotted to '/work/projects/outer_75mm/exports/lpkf_rs274x_review/rx_coil_3t-Edge_Cuts.gm1'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "drill",
+      "--format",
+      "excellon",
+      "--excellon-units",
+      "mm",
+      "--generate-map",
+      "--map-format",
+      "gerberx2",
+      "--output",
+      "/work/projects/outer_75mm/exports/gerber_review/",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Created file '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t.drl'\nCreated file '/work/projects/outer_75mm/exports/gerber_review/rx_coil_3t-drl_map.gbr'.\nDone.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pos",
+      "--format",
+      "csv",
+      "--units",
+      "mm",
+      "--side",
+      "front",
+      "--output",
+      "/work/projects/outer_75mm/exports/placement_front.csv",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Wrote position data to '/work/projects/outer_75mm/exports/placement_front.csv'.\n"
+  },
+  {
+    "argv": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "step",
+      "--force",
+      "--subst-models",
+      "--output",
+      "/work/projects/outer_75mm/exports/assembly_review.step",
+      "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
+    ],
+    "returncode": 0,
+    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCould not add 3D model for J1.\nFile not found: ${KIPRJMOD}/3dmodels/SMA_Amphenol_132134_Vertical.step\nCreate PCB solid model.\nBoard outline: found 193 initial points.\nBuild board outlines (1 outlines) with 193 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/outer_75mm/exports/assembly_review.step' created.\n\nExport time 0.039 s\n"
+  }
+]

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/work/projects/centerline_75mm/rx_coil_3t.kicad_sch</source>
+    <date>2026-11-18T01:02:57+0000</date>
+    <tool>Eeschema 9.0.7</tool>
+    <textvar name="DESIGN_STATUS">BENCH PROTOTYPE - NOT RF VALIDATED</textvar>
+    <textvar name="DIAMETER_CONVENTION">75 mm CENTRELINE diameter</textvar>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>3T MRI Receive Coil - 123.26 MHz target</title>
+        <company/>
+        <rev>A.1</rev>
+        <date>2026-11-18</date>
+        <source>rx_coil_3t.kicad_sch</source>
+        <comment number="1" value="75 mm CENTRELINE diameter"/>
+        <comment number="2" value="Bench prototype: geometry / SMA / substrate require lab confirmation"/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>5pF</value>
+      <footprint>CoilParts:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="Role">Distributed capacitor</field>
+        <field name="Footprint">CoilParts:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CoilParts" part="Capacitor_1210" description=""/>
+      <property name="Role" value="Distributed capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rx_coil_3t.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba75c011-0000-4000-8000-000000000002</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>5pF</value>
+      <footprint>CoilParts:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="Role">Distributed capacitor</field>
+        <field name="Footprint">CoilParts:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CoilParts" part="Capacitor_1210" description=""/>
+      <property name="Role" value="Distributed capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rx_coil_3t.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba75c011-0000-4000-8000-000000000003</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>5pF</value>
+      <footprint>CoilParts:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="Role">Distributed tuning capacitor</field>
+        <field name="Footprint">CoilParts:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CoilParts" part="Capacitor_1210" description=""/>
+      <property name="Role" value="Distributed tuning capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rx_coil_3t.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba75c011-0000-4000-8000-000000000004</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>5pF</value>
+      <footprint>CoilParts:C_1210_3225Metric</footprint>
+      <fields>
+        <field name="Role">Series matching capacitor</field>
+        <field name="Footprint">CoilParts:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CoilParts" part="Capacitor_1210" description=""/>
+      <property name="Role" value="Series matching capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rx_coil_3t.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba75c011-0000-4000-8000-000000000005</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>SMA_132134</value>
+      <footprint>CoilParts:SMA_Amphenol_132134_Vertical</footprint>
+      <datasheet>https://www.amphenolrf.com/en-us/part/132134/662/</datasheet>
+      <fields>
+        <field name="Role">Candidate footprint; lab part not specified</field>
+        <field name="Footprint">CoilParts:SMA_Amphenol_132134_Vertical</field>
+        <field name="Datasheet">https://www.amphenolrf.com/en-us/part/132134/662/</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="CoilParts" part="SMA_132134" description=""/>
+      <property name="Role" value="Candidate footprint; lab part not specified"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="rx_coil_3t.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba75c011-0000-4000-8000-000000000006</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="CoilParts" part="Capacitor_1210">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">Capacitor_1210</field>
+        <field name="Footprint">CoilParts:C_1210_3225Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CoilParts" part="SMA_132134">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">SMA_132134</field>
+        <field name="Footprint">CoilParts:SMA_Amphenol_132134_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SIG" type="passive"/>
+        <pin num="2" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="CoilParts">
+      <uri>/work/projects/centerline_75mm/CoilParts.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GND" class="Default">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="SHIELD" pintype="passive"/>
+    </net>
+    <net code="2" name="LOOP_FEED" class="Default">
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+    </net>
+    <net code="3" name="LOOP_MID" class="Default">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+    </net>
+    <net code="4" name="RF_IN" class="Default">
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="SIG" pintype="passive"/>
+    </net>
+  </nets>
+</export>

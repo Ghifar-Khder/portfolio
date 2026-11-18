@@ -1,0 +1,7 @@
+REVIEW EXPORTS - NOT A FABRICATION RELEASE
+Select the diameter convention; confirm SMA, substrate and matching topology.
+Front copper is 35 um. No back-plane under loop; B.Cu has connector annuli only.
+Laser structuring: front copper, separate outline, appropriate drilling information.
+RS-274X set omits X2/net metadata and disables aperture macros.
+LPKF supervisor must set scale, layer interpretation, drilling and laser parameters.
+5 pF is initial only; no resonance, S11 or scanner safety validation is claimed.

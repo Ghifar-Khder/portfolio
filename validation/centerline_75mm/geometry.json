@@ -1,0 +1,52 @@
+{
+  "arc_geometry": [
+    {
+      "net": "GND",
+      "centre_x_mm": 99.99999954101311,
+      "centre_y_mm": 100.00000031912755,
+      "radius_mm": 37.499999753051405,
+      "width_mm": 5.0
+    },
+    {
+      "net": "LOOP_MID",
+      "centre_x_mm": 100.00000000000001,
+      "centre_y_mm": 100.00000012670822,
+      "radius_mm": 37.500000126708215,
+      "width_mm": 5.0
+    },
+    {
+      "net": "LOOP_FEED",
+      "centre_x_mm": 100.00000045898692,
+      "centre_y_mm": 100.00000031912765,
+      "radius_mm": 37.49999975305137,
+      "width_mm": 5.0
+    }
+  ],
+  "capacitor_spacing_deg": [
+    119.99999972644429,
+    120.00000054711137,
+    119.99999972644434
+  ],
+  "pcb_pin_nets": {
+    "C1": {
+      "1": "GND",
+      "2": "LOOP_MID"
+    },
+    "C2": {
+      "1": "LOOP_MID",
+      "2": "LOOP_FEED"
+    },
+    "C3": {
+      "1": "LOOP_FEED",
+      "2": "GND"
+    },
+    "C4": {
+      "1": "RF_IN",
+      "2": "LOOP_FEED"
+    },
+    "J1": {
+      "1": "RF_IN",
+      "2": "GND"
+    }
+  }
+}

@@ -1,0 +1,466 @@
+{
+  "status": "PASS",
+  "kicad_version": "9.0.7",
+  "source_commit": "f306fa3bba26f9191df50898d9198e8a1b07e788",
+  "generated_utc": "2026-11-18T01:03:03.602117+00:00",
+  "checks": [
+    {
+      "check": "centerline_75mm: native PCB parser",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: five physical components",
+      "passed": true,
+      "details": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "J1"
+      ]
+    },
+    {
+      "check": "centerline_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: PCB pin net mapping",
+      "passed": true,
+      "details": {
+        "C1": {
+          "1": "GND",
+          "2": "LOOP_MID"
+        },
+        "C2": {
+          "1": "LOOP_MID",
+          "2": "LOOP_FEED"
+        },
+        "C3": {
+          "1": "LOOP_FEED",
+          "2": "GND"
+        },
+        "C4": {
+          "1": "RF_IN",
+          "2": "LOOP_FEED"
+        },
+        "J1": {
+          "1": "RF_IN",
+          "2": "GND"
+        }
+      }
+    },
+    {
+      "check": "centerline_75mm: no copper zones or ground plane",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: routed conductors on front copper only",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: exactly three circular conductor arcs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        99.99999954101311,
+        100.00000031912755,
+        37.499999753051405
+      ]
+    },
+    {
+      "check": "centerline_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        100.00000000000001,
+        100.00000012670822,
+        37.500000126708215
+      ]
+    },
+    {
+      "check": "centerline_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        100.00000045898692,
+        100.00000031912765,
+        37.49999975305137
+      ]
+    },
+    {
+      "check": "centerline_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C1 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          67.524047,
+          81.25
+        ],
+        "angle": 209.9999997264443
+      }
+    },
+    {
+      "check": "centerline_75mm: C1.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C1.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C2 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          132.475953,
+          81.25
+        ],
+        "angle": 330.00000027355566
+      }
+    },
+    {
+      "check": "centerline_75mm: C2.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C2.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C3 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          100.0,
+          137.5
+        ],
+        "angle": 90.0
+      }
+    },
+    {
+      "check": "centerline_75mm: C3.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: C3.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "centerline_75mm: 120-degree spacing",
+      "passed": true,
+      "details": [
+        119.99999972644429,
+        120.00000054711137,
+        119.99999972644434
+      ]
+    },
+    {
+      "check": "centerline_75mm: connector hole schedule",
+      "passed": true,
+      "details": [
+        1.5,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ]
+    },
+    {
+      "check": "centerline_75mm: schematic-to-PCB explicit netlist comparison",
+      "passed": true,
+      "details": {
+        "C1": {
+          "1": "GND",
+          "2": "LOOP_MID"
+        },
+        "C3": {
+          "2": "GND",
+          "1": "LOOP_FEED"
+        },
+        "J1": {
+          "2": "GND",
+          "1": "RF_IN"
+        },
+        "C2": {
+          "2": "LOOP_FEED",
+          "1": "LOOP_MID"
+        },
+        "C4": {
+          "2": "LOOP_FEED",
+          "1": "RF_IN"
+        }
+      }
+    },
+    {
+      "check": "outer_75mm: native PCB parser",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: five physical components",
+      "passed": true,
+      "details": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "J1"
+      ]
+    },
+    {
+      "check": "outer_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: repeated J1.2 shield pads share net",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: PCB pin net mapping",
+      "passed": true,
+      "details": {
+        "C1": {
+          "1": "GND",
+          "2": "LOOP_MID"
+        },
+        "C2": {
+          "1": "LOOP_MID",
+          "2": "LOOP_FEED"
+        },
+        "C3": {
+          "1": "LOOP_FEED",
+          "2": "GND"
+        },
+        "C4": {
+          "1": "RF_IN",
+          "2": "LOOP_FEED"
+        },
+        "J1": {
+          "1": "RF_IN",
+          "2": "GND"
+        }
+      }
+    },
+    {
+      "check": "outer_75mm: no copper zones or ground plane",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: routed conductors on front copper only",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: exactly three circular conductor arcs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        100.0000000254756,
+        99.99999989068068,
+        34.999999962012524
+      ]
+    },
+    {
+      "check": "outer_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        100.00000000000001,
+        99.9999998465555,
+        34.99999984655548
+      ]
+    },
+    {
+      "check": "outer_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: arc centre and radius",
+      "passed": true,
+      "details": [
+        99.99999997452443,
+        99.99999989068071,
+        34.999999962012495
+      ]
+    },
+    {
+      "check": "outer_75mm: 5.000 mm conductor width",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C1 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          69.689111,
+          82.5
+        ],
+        "angle": 210.00000010841617
+      }
+    },
+    {
+      "check": "outer_75mm: C1.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C1.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C2 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          130.310889,
+          82.5
+        ],
+        "angle": 329.9999998915838
+      }
+    },
+    {
+      "check": "outer_75mm: C2.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C2.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C3 radius and angle",
+      "passed": true,
+      "details": {
+        "position": [
+          100.0,
+          135.0
+        ],
+        "angle": 90.0
+      }
+    },
+    {
+      "check": "outer_75mm: C3.1 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: C3.2 land dimensions",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "outer_75mm: 120-degree spacing",
+      "passed": true,
+      "details": [
+        120.00000010841617,
+        119.99999978316762,
+        120.0000001084162
+      ]
+    },
+    {
+      "check": "outer_75mm: connector hole schedule",
+      "passed": true,
+      "details": [
+        1.5,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ]
+    },
+    {
+      "check": "outer_75mm: schematic-to-PCB explicit netlist comparison",
+      "passed": true,
+      "details": {
+        "C1": {
+          "1": "GND",
+          "2": "LOOP_MID"
+        },
+        "C3": {
+          "2": "GND",
+          "1": "LOOP_FEED"
+        },
+        "J1": {
+          "2": "GND",
+          "1": "RF_IN"
+        },
+        "C2": {
+          "2": "LOOP_FEED",
+          "1": "LOOP_MID"
+        },
+        "C4": {
+          "2": "LOOP_FEED",
+          "1": "RF_IN"
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "rf_performance_validated": false,
+  "fabrication_release": false,
+  "models_included": [
+    "projects/centerline_75mm/3dmodels/C_1210_3225Metric.step",
+    "projects/outer_75mm/3dmodels/C_1210_3225Metric.step"
+  ],
+  "limitations": [
+    "Diameter convention and lab SMA unconfirmed",
+    "Nominal 1.6 mm FR4 is provisional",
+    "RF performance and MR safety are not validated by ERC/DRC"
+  ]
+}
