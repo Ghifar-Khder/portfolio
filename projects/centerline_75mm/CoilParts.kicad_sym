@@ -1,0 +1,23 @@
+(kicad_symbol_lib (version 20231120) (generator coil_project_generator)
+(symbol "Capacitor_1210"
+    (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (property "Reference" "C" (at 2.54 1.27 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "Capacitor_1210" (at 2.54 -1.27 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "CoilParts:C_1210_3225Metric" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+    (symbol "Capacitor_1210_0_1"
+      (polyline (pts (xy -2.032 0.762) (xy 2.032 0.762)) (stroke (width 0.254) (type default)) (fill (type none)))
+      (polyline (pts (xy -2.032 -0.762) (xy 2.032 -0.762)) (stroke (width 0.254) (type default)) (fill (type none))))
+    (symbol "Capacitor_1210_1_1"
+      (pin passive line (at 0 3.81 270) (length 3.048) (name "~" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at 0 -3.81 90) (length 3.048) (name "~" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))))
+(symbol "SMA_132134"
+    (pin_names (offset 0.508)) (in_bom yes) (on_board yes)
+    (property "Reference" "J" (at 0 6.35 0) (effects (font (size 1.27 1.27))))
+    (property "Value" "SMA_132134" (at 0 -6.35 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "CoilParts:SMA_Amphenol_132134_Vertical" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+    (symbol "SMA_132134_0_1"
+      (rectangle (start -2.54 3.81) (end 7.62 -3.81) (stroke (width 0.254) (type default)) (fill (type background))))
+    (symbol "SMA_132134_1_1"
+      (pin passive line (at -7.62 2.54 0) (length 5.08) (name "SIG" (effects (font (size 1 1)))) (number "1" (effects (font (size 1.27 1.27)))))
+      (pin passive line (at -7.62 -2.54 0) (length 5.08) (name "SHIELD" (effects (font (size 1 1)))) (number "2" (effects (font (size 1.27 1.27)))))))
+)

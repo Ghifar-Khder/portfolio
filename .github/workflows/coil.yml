@@ -1,0 +1,62 @@
+name: KiCad coil validation
+on:
+  push:
+    branches: [kicad-3t-receive-coil]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kicad-3t-coil
+  cancel-in-progress: true
+jobs:
+  kicad:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate both KiCad diameter variants
+        run: node tools/generate.mjs
+      - name: Native KiCad checks and fabrication-review exports
+        id: cad
+        continue-on-error: true
+        env:
+          KICAD_IMAGE: ghcr.io/kicad/kicad:9.0.7-full@sha256:01bb9b83411d09a2b5097a644a84b768513cbc5de7f24412906e4db74e077786
+        run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp/kicad-home \
+            -e KICAD_CONFIG_HOME=/tmp/kicad-config \
+            -e BUILD_COMMIT="$GITHUB_SHA" \
+            -v "$GITHUB_WORKSPACE:/work" \
+            -w /work \
+            --entrypoint /usr/bin/python3 \
+            "$KICAD_IMAGE" tools/validate.py
+      - name: Save generated CAD and reports on this branch only
+        if: always()
+        run: |
+          test "$GITHUB_REF_NAME" = "kicad-3t-receive-coil"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects
+          if [ -d validation ]; then git add validation; fi
+          if [ -d dist ]; then git add dist; fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Save KiCad exports and validation results [skip ci]"
+            git push origin HEAD:refs/heads/kicad-3t-receive-coil
+          fi
+      - name: Attach project and reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 3T-receive-coil-KiCad
+          path: |
+            projects/
+            validation/
+            dist/
+            README.md
+            DESIGN_NOTES.md
+            THIRD_PARTY_NOTICES.md
+          retention-days: 30
+      - name: Enforce validation result
+        if: steps.cad.outcome != 'success'
+        run: exit 1

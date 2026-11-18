@@ -1,0 +1,170 @@
+{
+  "variant": "centerline_75mm",
+  "schematic_root_uuid": "ba75c011-0000-4000-8000-000000000001",
+  "project": "rx_coil_3t",
+  "status": "CAD prototype; engineering confirmations and bench tuning outstanding",
+  "geometry": {
+    "diameter_meaning": "75 mm CENTRELINE diameter",
+    "center_mm": [
+      100,
+      100
+    ],
+    "centerline_diameter_mm": 75,
+    "outer_diameter_mm": 80,
+    "inner_diameter_mm": 70,
+    "track_width_mm": 5,
+    "front_copper_thickness_mm": 0.035,
+    "capacitor_angles_deg": {
+      "C1": 210,
+      "C2": 330,
+      "C3": 90
+    },
+    "board_circle_diameter_mm": 90,
+    "feed_tab_width_mm": 20,
+    "board_bottom_y_mm": 166.5,
+    "nominal_board_thickness_mm": 1.6
+  },
+  "components": [
+    {
+      "reference": "C1",
+      "position_mm": [
+        67.524047,
+        81.25
+      ],
+      "rotation_deg": 60,
+      "uuid": "ba75c011-0000-4000-8000-000000000002",
+      "pins": {
+        "1": "GND",
+        "2": "LOOP_MID"
+      }
+    },
+    {
+      "reference": "C2",
+      "position_mm": [
+        132.475953,
+        81.25
+      ],
+      "rotation_deg": 300,
+      "uuid": "ba75c011-0000-4000-8000-000000000003",
+      "pins": {
+        "1": "LOOP_MID",
+        "2": "LOOP_FEED"
+      }
+    },
+    {
+      "reference": "C3",
+      "position_mm": [
+        100,
+        137.5
+      ],
+      "rotation_deg": 180,
+      "uuid": "ba75c011-0000-4000-8000-000000000004",
+      "pins": {
+        "1": "LOOP_FEED",
+        "2": "GND"
+      }
+    },
+    {
+      "reference": "C4",
+      "position_mm": [
+        100,
+        145.5
+      ],
+      "rotation_deg": 90,
+      "uuid": "ba75c011-0000-4000-8000-000000000005",
+      "pins": {
+        "1": "RF_IN",
+        "2": "LOOP_FEED"
+      }
+    },
+    {
+      "reference": "J1",
+      "position_mm": [
+        100,
+        156.5
+      ],
+      "rotation_deg": 0,
+      "uuid": "ba75c011-0000-4000-8000-000000000006",
+      "pins": {
+        "1": "RF_IN",
+        "2": "GND"
+      }
+    }
+  ],
+  "loop_arcs": [
+    {
+      "net": "GND",
+      "start_deg": 97.66225566076606,
+      "end_deg": 202.33774433923392,
+      "radius_mm": 37.5,
+      "width_mm": 5,
+      "from": "C3.2",
+      "to": "C1.1"
+    },
+    {
+      "net": "LOOP_MID",
+      "start_deg": 217.66225566076608,
+      "end_deg": 322.33774433923395,
+      "radius_mm": 37.5,
+      "width_mm": 5,
+      "from": "C1.2",
+      "to": "C2.1"
+    },
+    {
+      "net": "LOOP_FEED",
+      "start_deg": 337.66225566076605,
+      "end_deg": 442.33774433923395,
+      "radius_mm": 37.5,
+      "width_mm": 5,
+      "from": "C2.2",
+      "to": "C3.1"
+    }
+  ],
+  "expected_pin_nets": {
+    "C1": {
+      "1": "GND",
+      "2": "LOOP_MID"
+    },
+    "C2": {
+      "1": "LOOP_MID",
+      "2": "LOOP_FEED"
+    },
+    "C3": {
+      "1": "LOOP_FEED",
+      "2": "GND"
+    },
+    "C4": {
+      "1": "RF_IN",
+      "2": "LOOP_FEED"
+    },
+    "J1": {
+      "1": "RF_IN",
+      "2": "GND"
+    }
+  },
+  "hole_schedule": [
+    {
+      "diameter_mm": 1.5,
+      "count": 1,
+      "reference": "J1 centre"
+    },
+    {
+      "diameter_mm": 1.7,
+      "count": 4,
+      "reference": "J1 shield"
+    }
+  ],
+  "assumptions": [
+    "Diameter convention must be selected before fabrication",
+    "1.6 mm FR4 is provisional",
+    "SMA Amphenol 132134 is a candidate, not a confirmed supplied part",
+    "C4 series match topology is a design proposal",
+    "5 pF values are assembly starting values, not final tuning values"
+  ],
+  "rf_validation": {
+    "target_hz": 123260000,
+    "s11_target_db": -20,
+    "measured": false,
+    "detuning_included": false
+  }
+}

@@ -1,0 +1,6 @@
+Reference,Quantity,Value,Package,Role,Selection_status
+C1,1,5 pF initial,1210 / 3225,Distributed capacitor,Final capacitance and RF-rated C0G part TBD
+C2,1,5 pF initial,1210 / 3225,Distributed capacitor,Final capacitance and RF-rated C0G part TBD
+C3,1,5 pF initial,1210 / 3225,Distributed tuning capacitor,Final capacitance and RF-rated C0G part TBD
+C4,1,5 pF provisional initial,1210 / 3225,Series matching capacitor,Added topology assumption; final value TBD
+J1,1,SMA female 50 ohm,Amphenol 132134 vertical THT candidate,Measurement feed,Confirm supplied connector; not MRI-qualified by this design
