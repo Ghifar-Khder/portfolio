@@ -50,7 +50,7 @@ const generate = function generateCoilProjects() {
     if(model) s+=`(model "\${KIPRJMOD}/3dmodels/C_1210_3225Metric.step" (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))\n`;
     return s;
   }
-  function smaBody(nets=null, model=true) {
+  function smaBody(nets=null, model=false) {
     let s=`(descr "Candidate connector: Amphenol RF 132134; verify actual lab connector before fabrication") (tags "SMA THT vertical") (attr through_hole)\n`;
     s+=`(fp_circle (center 0 0) (end 3.175 0) (stroke (width 0.1) (type solid)) (fill none) (layer "F.Fab"))\n`;
     for(const [a,b] of [
