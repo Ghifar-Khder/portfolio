@@ -1,8 +1,8 @@
 {
   "status": "PASS",
   "kicad_version": "9.0.7",
-  "source_commit": "f306fa3bba26f9191df50898d9198e8a1b07e788",
-  "generated_utc": "2026-11-18T01:03:03.602117+00:00",
+  "source_commit": "cc7b68390fcad3a43f7b9d42be616204b201dbc5",
+  "generated_utc": "2026-11-18T10:23:39.305732+00:00",
   "checks": [
     {
       "check": "centerline_75mm: native PCB parser",
@@ -228,6 +228,11 @@
       }
     },
     {
+      "check": "centerline_75mm: no missing 3D references",
+      "passed": true,
+      "details": null
+    },
+    {
       "check": "outer_75mm: native PCB parser",
       "passed": true,
       "details": null
@@ -449,6 +454,11 @@
           "1": "RF_IN"
         }
       }
+    },
+    {
+      "check": "outer_75mm: no missing 3D references",
+      "passed": true,
+      "details": null
     }
   ],
   "errors": [],

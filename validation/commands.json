@@ -90,12 +90,14 @@
       "--page-size-mode",
       "2",
       "--exclude-drawing-sheet",
+      "--mode-single",
+      "--black-and-white",
       "--output",
       "/work/projects/centerline_75mm/exports/preview/pcb_top.svg",
       "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/centerline_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
+    "output": "Plotted to '/work/projects/centerline_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
   },
   {
     "argv": [
@@ -108,12 +110,14 @@
       "--page-size-mode",
       "2",
       "--exclude-drawing-sheet",
+      "--mode-single",
+      "--black-and-white",
       "--output",
       "/work/projects/centerline_75mm/exports/preview/front_copper.svg",
       "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/centerline_75mm/exports/preview/front_copper.svg'.\nDone.\n"
+    "output": "Plotted to '/work/projects/centerline_75mm/exports/preview/front_copper.svg'.\nDone.\n"
   },
   {
     "argv": [
@@ -196,11 +200,11 @@
       "--force",
       "--subst-models",
       "--output",
-      "/work/projects/centerline_75mm/exports/assembly_review.step",
+      "/work/projects/centerline_75mm/exports/pcb_and_capacitors_review.step",
       "/work/projects/centerline_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCould not add 3D model for J1.\nFile not found: ${KIPRJMOD}/3dmodels/SMA_Amphenol_132134_Vertical.step\nCreate PCB solid model.\nBoard outline: found 200 initial points.\nBuild board outlines (1 outlines) with 200 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/centerline_75mm/exports/assembly_review.step' created.\n\nExport time 0.040 s\n"
+    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCreate PCB solid model.\nBoard outline: found 200 initial points.\nBuild board outlines (1 outlines) with 200 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/centerline_75mm/exports/pcb_and_capacitors_review.step' created.\n\nExport time 0.041 s\n"
   },
   {
     "argv": [
@@ -285,12 +289,14 @@
       "--page-size-mode",
       "2",
       "--exclude-drawing-sheet",
+      "--mode-single",
+      "--black-and-white",
       "--output",
       "/work/projects/outer_75mm/exports/preview/pcb_top.svg",
       "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/outer_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
+    "output": "Plotted to '/work/projects/outer_75mm/exports/preview/pcb_top.svg'.\nDone.\n"
   },
   {
     "argv": [
@@ -303,12 +309,14 @@
       "--page-size-mode",
       "2",
       "--exclude-drawing-sheet",
+      "--mode-single",
+      "--black-and-white",
       "--output",
       "/work/projects/outer_75mm/exports/preview/front_copper.svg",
       "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "\u001b[33;1mThis command has deprecated behavior as of KiCad 9.0, the default behavior of this command will change in a future release.\u001b[0m\n\u001b[33;1mThe new behavior will match --mode-multi\u001b[0m\nPlotted to '/work/projects/outer_75mm/exports/preview/front_copper.svg'.\nDone.\n"
+    "output": "Plotted to '/work/projects/outer_75mm/exports/preview/front_copper.svg'.\nDone.\n"
   },
   {
     "argv": [
@@ -391,10 +399,10 @@
       "--force",
       "--subst-models",
       "--output",
-      "/work/projects/outer_75mm/exports/assembly_review.step",
+      "/work/projects/outer_75mm/exports/pcb_and_capacitors_review.step",
       "/work/projects/outer_75mm/rx_coil_3t.kicad_pcb"
     ],
     "returncode": 0,
-    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCould not add 3D model for J1.\nFile not found: ${KIPRJMOD}/3dmodels/SMA_Amphenol_132134_Vertical.step\nCreate PCB solid model.\nBoard outline: found 193 initial points.\nBuild board outlines (1 outlines) with 193 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/outer_75mm/exports/assembly_review.step' created.\n\nExport time 0.039 s\n"
+    "output": "Determining PCB data.\nBuild STEP data.\nAdding component C1.\nAdding component C2.\nAdding component C3.\nAdding component C4.\nCreate PCB solid model.\nBoard outline: found 193 initial points.\nBuild board outlines (1 outlines) with 193 points.\nBuild board cutouts and holes (10 hole(s)).\nSubtracting holes for shapes\nSubtracting holes for pads\nSubtracting holes for vias\nGenerate board full shape.\nWriting STEP file.\n\n*******************************************************************\n******        Statistics on Transfer (Write)                 ******\n\n*******************************************************************\n******        Transfer Mode = 0  I.E.  As Is       ******\n******        Transferring Shape, ShapeType = 0                      ******\n** WorkSession : Sending all data\n Step File Name : $tempfile$.step(1303 ents)  Write  Done\nSTEP file '/work/projects/outer_75mm/exports/pcb_and_capacitors_review.step' created.\n\nExport time 0.040 s\n"
   }
 ]

@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/work/projects/outer_75mm/rx_coil_3t.kicad_sch</source>
-    <date>2026-11-18T01:03:00+0000</date>
+    <date>2026-11-18T10:23:36+0000</date>
     <tool>Eeschema 9.0.7</tool>
     <textvar name="DESIGN_STATUS">BENCH PROTOTYPE - NOT RF VALIDATED</textvar>
     <textvar name="DIAMETER_CONVENTION">75 mm OUTER copper diameter</textvar>

@@ -2,9 +2,9 @@
 
 KiCad: 9.0.7
 
-Source commit: f306fa3bba26f9191df50898d9198e8a1b07e788
+Source commit: cc7b68390fcad3a43f7b9d42be616204b201dbc5
 
-54/54 geometry/netlist assertions passed.
+56/56 geometry/netlist assertions passed.
 
 Native ERC/DRC command outcomes are in commands.json; diagnostics are in each variant folder.
 
