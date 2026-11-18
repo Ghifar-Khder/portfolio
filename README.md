@@ -27,7 +27,7 @@ Open either project's **rx_coil_3t.kicad_pro** in KiCad 9 or 10. Both folders co
 - BOM, placement information, dimensional manifest and native schematic/PCB previews.
 - Native ERC, DRC with schematic parity, explicit netlist comparison and geometry checks.
 - Gerber X2, plain RS-274X compatibility exports and metric Excellon drill data.
-- Assembly STEP review model and official component models when supplied by the pinned KiCad image.
+- STEP review model of the PCB and capacitors, with official capacitor models. The SMA has a verified land pattern but no included 3D body model.
 - Reproducible generation/validation scripts; SHA-256 manifest in the checked ZIP.
 
 ## Limits
@@ -52,4 +52,4 @@ This branch is public because it is hosted in an existing public repository. No 
 
 ![Schematic](projects/outer_75mm/exports/preview/rx_coil_3t.svg)
 
-Validation and previews become available when the cloud build completes.
+Native validation results and previews are included in the download. See the validation report for the exact source commit and KiCad version.
