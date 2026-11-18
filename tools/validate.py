@@ -34,9 +34,10 @@ for d in sorted((ROOT/"projects").iterdir()):
     if not d.is_dir(): continue
     out=d/"exports"; gerber=out/"gerber_review"; legacy=out/"lpkf_rs274x_review"; preview=out/"preview"; checkdir=REPORTS/d.name
     for p in [out,gerber,legacy,preview,checkdir,d/"3dmodels"]: p.mkdir(parents=True,exist_ok=True)
+    (out/"assembly_review.step").unlink(missing_ok=True)
     manifest=json.loads((d/"design_manifest.json").read_text())
     boardfile=d/"rx_coil_3t.kicad_pcb"; sch=d/"rx_coil_3t.kicad_sch"
-    for family,stem in [("Capacitor_SMD","C_1210_3225Metric"),("Connector_Coaxial","SMA_Amphenol_132134_Vertical")]:
+    for family,stem in [("Capacitor_SMD","C_1210_3225Metric")]:
         candidates=[Path("/usr/share/kicad/3dmodels")/(family+".3dshapes")/(stem+".step"),Path("/usr/share/kicad/packages3d")/(family+".3dshapes")/(stem+".step")]
         found=next((p for p in candidates if p.is_file()),None)
         if found:
@@ -89,14 +90,15 @@ for d in sorted((ROOT/"projects").iterdir()):
     run(["kicad-cli","sch","erc","--format","json","--severity-all","--exit-code-violations","--output",str(checkdir/"erc.json"),str(sch)])
     run(["kicad-cli","pcb","drc","--schematic-parity","--format","json","--severity-all","--exit-code-violations","--output",str(checkdir/"drc.json"),str(boardfile)])
     run(["kicad-cli","sch","export","svg","--output",str(preview)+"/",str(sch)])
-    run(["kicad-cli","pcb","export","svg","--layers","F.Cu,F.SilkS,Edge.Cuts","--page-size-mode","2","--exclude-drawing-sheet","--output",str(preview/"pcb_top.svg"),str(boardfile)])
-    run(["kicad-cli","pcb","export","svg","--layers","F.Cu,Edge.Cuts","--page-size-mode","2","--exclude-drawing-sheet","--output",str(preview/"front_copper.svg"),str(boardfile)])
+    run(["kicad-cli","pcb","export","svg","--layers","F.Cu,F.SilkS,Edge.Cuts","--page-size-mode","2","--exclude-drawing-sheet","--mode-single","--black-and-white","--output",str(preview/"pcb_top.svg"),str(boardfile)])
+    run(["kicad-cli","pcb","export","svg","--layers","F.Cu,Edge.Cuts","--page-size-mode","2","--exclude-drawing-sheet","--mode-single","--black-and-white","--output",str(preview/"front_copper.svg"),str(boardfile)])
     run(["kicad-cli","pcb","export","gerbers","--layers","F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,Edge.Cuts","--output",str(gerber)+"/",str(boardfile)])
     run(["kicad-cli","pcb","export","gerbers","--layers","F.Cu,Edge.Cuts","--no-x2","--no-netlist","--disable-aperture-macros","--output",str(legacy)+"/",str(boardfile)])
     run(["kicad-cli","pcb","export","drill","--format","excellon","--excellon-units","mm","--generate-map","--map-format","gerberx2","--output",str(gerber)+"/",str(boardfile)])
     for p in gerber.glob("*.drl"): shutil.copyfile(p,legacy/p.name)
     run(["kicad-cli","pcb","export","pos","--format","csv","--units","mm","--side","front","--output",str(out/"placement_front.csv"),str(boardfile)])
-    run(["kicad-cli","pcb","export","step","--force","--subst-models","--output",str(out/"assembly_review.step"),str(boardfile)])
+    step_result=run(["kicad-cli","pcb","export","step","--force","--subst-models","--output",str(out/"pcb_and_capacitors_review.step"),str(boardfile)])
+    check(d.name+": no missing 3D references", "File not found:" not in step_result.stdout and "Could not add 3D model" not in step_result.stdout)
     (checkdir/"geometry.json").write_text(json.dumps({"arc_geometry":actual,"capacitor_spacing_deg":spacing,"pcb_pin_nets":pinmap},indent=2)+"\n")
     (out/"READ_BEFORE_FABRICATION.txt").write_text(
       "REVIEW EXPORTS - NOT A FABRICATION RELEASE\n"
@@ -121,7 +123,7 @@ dist=ROOT/"dist"; dist.mkdir(exist_ok=True); zp=dist/"3T_Receive_Coil_KiCad.zip"
 if zp.exists(): zp.unlink()
 if not errors:
     included=[]
-    for base in ["projects","validation","tools"]: included.extend(p for p in (ROOT/base).rglob("*") if p.is_file() and not p.name.endswith((".lck",".bak")))
+    for base in ["projects","validation","tools",".github"]: included.extend(p for p in (ROOT/base).rglob("*") if p.is_file() and not p.name.endswith((".lck",".bak",".kicad_prl")))
     included.extend(ROOT/p for p in ["README.md","DESIGN_NOTES.md","THIRD_PARTY_NOTICES.md"] if (ROOT/p).exists())
     hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in included}
     (dist/"SHA256SUMS.json").write_text(json.dumps(hashes,indent=2)+"\n")
