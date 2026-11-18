@@ -65,7 +65,7 @@ J1 derives from KiCad's **SMA_Amphenol_132134_Vertical**:
 | Body fab outline | 7 × 7 mm |
 | Courtyard | 8.34 × 8.34 mm |
 
-This is **not a universal SMA footprint**. If the supplied SMA is edge-mount, right-angle or has different pin spacing, replace J1 and revise the feed. Mechanical footprint selection does not establish magnetic properties or MRI suitability.
+This is **not a universal SMA footprint**. If the supplied SMA is edge-mount, right-angle or has different pin spacing, replace J1 and revise the feed. Mechanical footprint selection does not establish magnetic properties or MRI suitability. The supplied STEP review contains the PCB and capacitors only: J1 has no included 3D body model, so this export must not be used to assess connector height or enclosure clearance.
 
 The footprint uses through-hole semantics. LPKF prototype holes may not be plated. The supervisor must choose the soldering/grounding arrangement; do not assume plated interlayer continuity. Every required route is on front copper.
 
